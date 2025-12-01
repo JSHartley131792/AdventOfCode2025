@@ -19,4 +19,10 @@ public class Rotations {
         }
     }
 
+    public void input(String inputString) {
+        String rotationString = inputString.substring(1, inputString.length());
+        int rotation = Integer.parseInt(rotationString);
+        rotate(rotation);
+    }
+
 }
