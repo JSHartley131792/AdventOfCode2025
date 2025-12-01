@@ -13,8 +13,8 @@ public class Rotations {
     }
 
     public void rotate(int i) {
-        position = (position + i) % dialMax;
-        if (position < 0) {
+        position = (position + i) % dialMax;  
+        while (position < 0) {
             position += dialMax;
         }
     }

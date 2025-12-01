@@ -44,6 +44,13 @@ public class RotationsTest {
     }
     
     @Test
+    public void canDoNegativeRotationByOver100() {
+        state.rotate(-401);
+        int expectedRotation = 99;
+        assertEquals(expectedRotation, state.getPosition());
+    }
+    
+    @Test
     public void canDoMultipleRotations() {
         state.rotate(1);
         state.rotate(1);
