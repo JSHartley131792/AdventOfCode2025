@@ -8,7 +8,7 @@ public class Main {
         rotations.readRotations("main", "input");
         System.out.println("The position ended up in: ");
         System.out.println(rotations.getPosition());
-        System.out.println("\nThe zero counter went to");
+        System.out.println("The zero counter went to: ");
         System.out.println(rotations.getZeroCounter());
     }
 }

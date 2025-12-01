@@ -18,18 +18,27 @@ public class Rotations {
     public int getPosition() {
         return position;
     }
-    
+
     public int getZeroCounter() {
         return zeroCounter;
     }
 
     public void rotate(int i) {
+        int change = i + position;
+        if (change == 0) {
+            zeroCounter += 1;
+        } else if (change < 0) {
+            if (position == 0) {
+                zeroCounter += Math.abs(change / dialMax);
+            } else {
+                zeroCounter += Math.abs(change / dialMax) + 1;
+            }
+        } else {
+            zeroCounter += Math.abs(change / dialMax);
+        }
         position = (position + i) % dialMax;
         while (position < 0) {
             position += dialMax;
-        }
-        if (position == 0) {
-            zeroCounter += 1;
         }
     }
 
@@ -50,7 +59,7 @@ public class Rotations {
 
     public void readRotations(String env, String fileName) {
         List<String> rotations = new ArrayList<>();
-        File rotationsFile = new File("src/" + env + "/resources/dayOne/"+ fileName + ".txt");
+        File rotationsFile = new File("src/" + env + "/resources/dayOne/" + fileName + ".txt");
         try (Scanner myReader = new Scanner(rotationsFile)) {
             while (myReader.hasNextLine()) {
                 String data = myReader.nextLine();

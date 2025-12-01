@@ -80,6 +80,42 @@ public class RotationsTest {
         assertEquals(expectedRotation, state.getPosition());
     }
 
+    // initial zero counter was only ending at 0
+    // new zero counter is anytime it passes 0
+
+    // you're actually supposed to count the number of times 
+    // any click causes the dial to point at 0, 
+    // regardless of whether it happens during a rotation or at the end of one.
+
+    // @Test
+    // public void canKeepTrackOfZeroCounter() {
+    //     // different starting position
+    //     state = new Rotations(50);
+
+    //     state.readRotations("test", "exampleZeroCounter");
+    //     int expectedRotation = 32;
+    //     int expectedZeroCounter = 3;
+    //     assertEquals(expectedRotation, state.getPosition());
+    //     assertEquals(expectedZeroCounter, state.getZeroCounter());
+    // }
+    
+    @Test
+    public void canKeepTrackOfZeroCounterInSingleRotation() {
+        state = new Rotations(50);
+        state.rotate(1000);
+        int expectedZeroCounter = 10;
+        assertEquals(expectedZeroCounter, state.getZeroCounter());
+    }
+    
+    
+    @Test
+    public void canKeepTrackOfZeroCounterInSingleNegativeRotation() {
+        state = new Rotations(50);
+        state.rotate(-1000);
+        int expectedZeroCounter = 10;
+        assertEquals(expectedZeroCounter, state.getZeroCounter());
+    }
+
     @Test
     public void canKeepTrackOfZeroCounter() {
         // different starting position
@@ -87,7 +123,27 @@ public class RotationsTest {
 
         state.readRotations("test", "exampleZeroCounter");
         int expectedRotation = 32;
-        int expectedZeroCounter = 3;
+        int expectedZeroCounter = 6;
+        assertEquals(expectedRotation, state.getPosition());
+        assertEquals(expectedZeroCounter, state.getZeroCounter());
+    }
+    
+    @Test
+    public void canKeepTrackOfZeroCounterInSingleNegativeSmallRotation() {
+        state = new Rotations(2);
+        state.rotate(-3);
+        int expectedRotation = 99;
+        int expectedZeroCounter = 1;
+        assertEquals(expectedRotation, state.getPosition());
+        assertEquals(expectedZeroCounter, state.getZeroCounter());
+    }
+    
+    @Test
+    public void canKeepTrackOfZeroCounterInSingleReverseRotation() {
+        state = new Rotations(50);
+        state.rotate(-50);
+        int expectedRotation = 0;
+        int expectedZeroCounter = 1;
         assertEquals(expectedRotation, state.getPosition());
         assertEquals(expectedZeroCounter, state.getZeroCounter());
     }
