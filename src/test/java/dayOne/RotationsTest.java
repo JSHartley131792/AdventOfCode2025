@@ -13,4 +13,11 @@ public class RotationsTest {
         int expectedRotation = 0;
         assertEquals(expectedRotation, result);
     }
+    
+    @Test
+    public void canDoRotationByOne() {
+        int result = Rotations.rotate(1);
+        int expectedRotation = 1;
+        assertEquals(expectedRotation, result);
+    }
 }
