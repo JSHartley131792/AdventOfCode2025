@@ -7,8 +7,12 @@ public class Rotations {
         this.position = position;
     }
 
-    public int rotate(int i) {
-        return (position + i) % 100;
+    public int getPosition() {
+        return position;
+    }
+
+    public void rotate(int i) {
+        position = (position + i) % 100;
     }
 
 }

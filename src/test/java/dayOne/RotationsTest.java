@@ -17,22 +17,31 @@ public class RotationsTest {
 
     @Test
     public void canDoZeroRotation() {
-        int result = state.rotate(0);
+        state.rotate(0);
         int expectedRotation = 0;
-        assertEquals(expectedRotation, result);
+        assertEquals(expectedRotation, state.getPosition());
     }
 
     @Test
     public void canDoRotationByOne() {
-        int result = state.rotate(1);
+        state.rotate(1);
         int expectedRotation = 1;
-        assertEquals(expectedRotation, result);
+        assertEquals(expectedRotation, state.getPosition());
     }
 
     @Test
     public void canDoRotationByOver100() {
-        int result = state.rotate(101);
+        state.rotate(101);
         int expectedRotation = 1;
-        assertEquals(expectedRotation, result);
+        assertEquals(expectedRotation, state.getPosition());
+    }
+    
+    @Test
+    public void canDoMultipleRotations() {
+        state.rotate(1);
+        state.rotate(1);
+        state.rotate(1);
+        int expectedRotation = 3;
+        assertEquals(expectedRotation, state.getPosition());
     }
 }
