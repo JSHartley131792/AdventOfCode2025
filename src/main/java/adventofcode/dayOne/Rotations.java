@@ -3,7 +3,8 @@ package adventofcode.dayOne;
 public class Rotations {
 
     public static int rotate(int i) {
-        return 0 + i;
+        int startingPosition = 0;
+        return (startingPosition + i) % 100;
     }
-
+    
 }

@@ -20,4 +20,11 @@ public class RotationsTest {
         int expectedRotation = 1;
         assertEquals(expectedRotation, result);
     }
+    
+    @Test
+    public void canDoRotationByOver100() {
+        int result = Rotations.rotate(101);
+        int expectedRotation = 1;
+        assertEquals(expectedRotation, result);
+    }
 }
