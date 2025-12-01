@@ -1,10 +1,14 @@
 package adventofcode.dayOne;
 
 public class Rotations {
+    int position;
 
-    public static int rotate(int i) {
-        int startingPosition = 0;
-        return (startingPosition + i) % 100;
+    public Rotations(int position) {
+        this.position = position;
     }
-    
+
+    public int rotate(int i) {
+        return (position + i) % 100;
+    }
+
 }
