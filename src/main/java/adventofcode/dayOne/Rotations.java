@@ -1,5 +1,11 @@
 package adventofcode.dayOne;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Scanner;
+
 public class Rotations {
     int position;
     int dialMax = 100;
@@ -34,4 +40,19 @@ public class Rotations {
         rotate(rotation);
     }
 
+    public void readRotations(String env) {
+        List<String> rotations = new ArrayList<>();
+        File rotationsFile = new File("src/" + env + "/resources/dayOne/input.txt");
+        try (Scanner myReader = new Scanner(rotationsFile)) {
+            while (myReader.hasNextLine()) {
+                String data = myReader.nextLine();
+                System.out.println(data);
+                rotations.add(data);
+            }
+        } catch (FileNotFoundException e) {
+            System.out.println("An error occurred.");
+            e.printStackTrace();
+        }
+        rotations.forEach(rotation -> input(rotation));
+    }
 }

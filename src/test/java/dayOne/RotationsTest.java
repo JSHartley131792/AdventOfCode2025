@@ -72,4 +72,11 @@ public class RotationsTest {
         int expectedRotation = 80;
         assertEquals(expectedRotation, state.getPosition());
     }
+
+    @Test
+    public void canReadFileOfRotations() {
+        state.readRotations("test");
+        int expectedRotation = 20;
+        assertEquals(expectedRotation, state.getPosition());
+    }
 }
