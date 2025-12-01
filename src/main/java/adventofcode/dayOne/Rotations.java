@@ -2,6 +2,7 @@ package adventofcode.dayOne;
 
 public class Rotations {
     int position;
+    int dialMax = 100;
 
     public Rotations(int position) {
         this.position = position;
@@ -12,7 +13,10 @@ public class Rotations {
     }
 
     public void rotate(int i) {
-        position = (position + i) % 100;
+        position = (position + i) % dialMax;
+        if (position < 0) {
+            position += dialMax;
+        }
     }
 
 }

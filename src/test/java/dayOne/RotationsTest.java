@@ -28,6 +28,13 @@ public class RotationsTest {
         int expectedRotation = 1;
         assertEquals(expectedRotation, state.getPosition());
     }
+    
+    @Test
+    public void canDoNegativeRotation() {
+        state.rotate(-15);
+        int expectedRotation = 85;
+        assertEquals(expectedRotation, state.getPosition());
+    }
 
     @Test
     public void canDoRotationByOver100() {
