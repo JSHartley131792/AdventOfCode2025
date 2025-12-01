@@ -13,15 +13,24 @@ public class Rotations {
     }
 
     public void rotate(int i) {
-        position = (position + i) % dialMax;  
+        position = (position + i) % dialMax;
         while (position < 0) {
             position += dialMax;
         }
     }
 
     public void input(String inputString) {
+        String orientation = inputString.substring(0, 1);
         String rotationString = inputString.substring(1, inputString.length());
-        int rotation = Integer.parseInt(rotationString);
+        int rotation;
+        switch (orientation) {
+            case "L":
+                rotation = -Integer.parseInt(rotationString);
+                break;
+            default:
+                rotation = Integer.parseInt(rotationString);
+                break;
+        }
         rotate(rotation);
     }
 

@@ -65,4 +65,11 @@ public class RotationsTest {
         int expectedRotation = 20;
         assertEquals(expectedRotation, state.getPosition());
     }
+    
+    @Test
+    public void canHandleLeftRotation() {
+        state.input("L20");
+        int expectedRotation = 80;
+        assertEquals(expectedRotation, state.getPosition());
+    }
 }
