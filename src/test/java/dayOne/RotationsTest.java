@@ -75,8 +75,20 @@ public class RotationsTest {
 
     @Test
     public void canReadFileOfRotations() {
-        state.readRotations("test");
+        state.readRotations("test", "input");
         int expectedRotation = 20;
         assertEquals(expectedRotation, state.getPosition());
+    }
+
+    @Test
+    public void canKeepTrackOfZeroCounter() {
+        // different starting position
+        state = new Rotations(50);
+
+        state.readRotations("test", "exampleZeroCounter");
+        int expectedRotation = 32;
+        int expectedZeroCounter = 3;
+        assertEquals(expectedRotation, state.getPosition());
+        assertEquals(expectedZeroCounter, state.getZeroCounter());
     }
 }

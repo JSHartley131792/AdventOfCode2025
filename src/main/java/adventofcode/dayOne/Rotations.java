@@ -8,6 +8,7 @@ import java.util.Scanner;
 
 public class Rotations {
     int position;
+    int zeroCounter = 0;
     int dialMax = 100;
 
     public Rotations(int position) {
@@ -17,11 +18,18 @@ public class Rotations {
     public int getPosition() {
         return position;
     }
+    
+    public int getZeroCounter() {
+        return zeroCounter;
+    }
 
     public void rotate(int i) {
         position = (position + i) % dialMax;
         while (position < 0) {
             position += dialMax;
+        }
+        if (position == 0) {
+            zeroCounter += 1;
         }
     }
 
@@ -40,9 +48,9 @@ public class Rotations {
         rotate(rotation);
     }
 
-    public void readRotations(String env) {
+    public void readRotations(String env, String fileName) {
         List<String> rotations = new ArrayList<>();
-        File rotationsFile = new File("src/" + env + "/resources/dayOne/input.txt");
+        File rotationsFile = new File("src/" + env + "/resources/dayOne/"+ fileName + ".txt");
         try (Scanner myReader = new Scanner(rotationsFile)) {
             while (myReader.hasNextLine()) {
                 String data = myReader.nextLine();
