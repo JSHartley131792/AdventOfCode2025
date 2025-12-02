@@ -1,17 +1,21 @@
 package adventofcode.dayTwo;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.util.Scanner;
+
 public class Search {
     int invalidCounter = 0;
     int invalidTotal = 0;
 
     public Search() {
-        
+
     }
 
     public int getCounter() {
         return invalidCounter;
     }
-    
+
     public int getInvalidTotal() {
         return invalidTotal;
     }
@@ -41,9 +45,22 @@ public class Search {
         for (String string : ranges) {
             String[] rangeExtremes = string.split("-");
             invalidsInRange(
-                Integer.parseInt(rangeExtremes[0]), 
-                Integer.parseInt(rangeExtremes[1])
-            );
+                    Integer.parseInt(rangeExtremes[0]),
+                    Integer.parseInt(rangeExtremes[1]));
+        }
+    }
+
+    public void readRanges(String env, String fileName) {
+        File rotationsFile = new File("src/" + env + "/resources/dayTwo/" + fileName + ".txt");
+        try (Scanner myReader = new Scanner(rotationsFile)) {
+            while (myReader.hasNextLine()) {
+                String data = myReader.nextLine();
+                System.out.println(data);
+                parseAndCalcRanges(data);
+            }
+        } catch (FileNotFoundException e) {
+            System.out.println("An error occurred.");
+            e.printStackTrace();
         }
     }
 }

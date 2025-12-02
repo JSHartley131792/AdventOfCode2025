@@ -53,4 +53,13 @@ public class SearchTest {
         assertEquals(expectedCounter, search.getCounter());
         assertEquals(expectedTotal, search.getInvalidTotal());
     }
+    
+    @Test
+    public void canReadFileOfRanges() {
+        search.readRanges("test", "input");
+        int expectedCounter = 8;
+        int expectedTotal = 1227775554;
+        assertEquals(expectedCounter, search.getCounter());
+        assertEquals(expectedTotal, search.getInvalidTotal());
+    }
 }
