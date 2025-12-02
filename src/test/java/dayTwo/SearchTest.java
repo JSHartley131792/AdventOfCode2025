@@ -2,6 +2,7 @@ package dayTwo;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import adventofcode.dayTwo.Search;
@@ -10,17 +11,30 @@ import adventofcode.dayTwo.Search;
 // made only of some sequence of digits repeated twice.
 
 public class SearchTest {
+    Search search;
+    @BeforeEach
+    public void setUpSearchState() {
+        search = new Search(0);
+    }
+
     @Test
     public void canRecogniseValidIds() {
-        boolean result = Search.isInvalid(1);
+        boolean result = search.isInvalid(1);
         boolean expectedResult = false;
         assertEquals(expectedResult, result);
     }
     
     @Test
     public void canRecogniseInvalidIds() {
-        boolean result = Search.isInvalid(11);
+        boolean result = search.isInvalid(11);
         boolean expectedResult = true;
         assertEquals(expectedResult, result);
+    }
+
+    @Test
+    public void canCountInvalidsInRange() {
+        search.invalidsInRange(11, 22);
+        int expectedResult = 2;
+        assertEquals(expectedResult, search.getCounter());
     }
 }

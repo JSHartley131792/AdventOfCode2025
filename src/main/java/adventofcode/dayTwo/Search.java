@@ -1,8 +1,17 @@
 package adventofcode.dayTwo;
 
 public class Search {
+    int invalidCounter = 0;
 
-    public static boolean isInvalid(int i) {
+    public Search(int invalidCounter) {
+        this.invalidCounter = invalidCounter;
+    }
+
+    public int getCounter() {
+        return invalidCounter;
+    }
+
+    public boolean isInvalid(int i) {
         String numberString = Integer.toString(i);
         if (numberString.length() % 2 == 0) {
             String firstHalf = numberString.substring(0, (numberString.length() / 2));
@@ -10,6 +19,14 @@ public class Search {
             return firstHalf.equals(secondHalf);
         } else {
             return false;
+        }
+    }
+
+    public void invalidsInRange(int rangeStart, int rangeEnd) {
+        for (int i = rangeStart; i <= rangeEnd; i++) {
+            if (isInvalid(i) == true) {
+                invalidCounter += 1;
+            }
         }
     }
 }
