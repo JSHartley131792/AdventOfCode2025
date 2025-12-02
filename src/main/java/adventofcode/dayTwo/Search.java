@@ -5,23 +5,23 @@ import java.io.FileNotFoundException;
 import java.util.Scanner;
 
 public class Search {
-    int invalidCounter = 0;
-    int invalidTotal = 0;
+    long invalidCounter;
+    long invalidTotal;
 
     public Search() {
 
     }
 
-    public int getCounter() {
+    public long getCounter() {
         return invalidCounter;
     }
 
-    public int getInvalidTotal() {
+    public long getInvalidTotal() {
         return invalidTotal;
     }
 
-    public boolean isInvalid(int i) {
-        String numberString = Integer.toString(i);
+    public boolean isInvalid(long i) {
+        String numberString = String.valueOf(i);
         if (numberString.length() % 2 == 0) {
             String firstHalf = numberString.substring(0, (numberString.length() / 2));
             String secondHalf = numberString.substring((numberString.length() / 2), numberString.length());
@@ -31,8 +31,8 @@ public class Search {
         }
     }
 
-    public void invalidsInRange(int rangeStart, int rangeEnd) {
-        for (int i = rangeStart; i <= rangeEnd; i++) {
+    public void invalidsInRange(long rangeStart, long rangeEnd) {
+        for (long i = rangeStart; i <= rangeEnd; i++) {
             if (isInvalid(i) == true) {
                 invalidCounter += 1;
                 invalidTotal += i;
@@ -45,8 +45,8 @@ public class Search {
         for (String string : ranges) {
             String[] rangeExtremes = string.split("-");
             invalidsInRange(
-                    Integer.parseInt(rangeExtremes[0]),
-                    Integer.parseInt(rangeExtremes[1]));
+                    Long.valueOf(rangeExtremes[0]),
+                    Long.valueOf(rangeExtremes[1]));
         }
     }
 
