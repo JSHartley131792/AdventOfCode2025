@@ -2,13 +2,18 @@ package adventofcode.dayTwo;
 
 public class Search {
     int invalidCounter = 0;
+    int invalidTotal = 0;
 
-    public Search(int invalidCounter) {
-        this.invalidCounter = invalidCounter;
+    public Search() {
+        
     }
 
     public int getCounter() {
         return invalidCounter;
+    }
+    
+    public int getInvalidTotal() {
+        return invalidTotal;
     }
 
     public boolean isInvalid(int i) {
@@ -26,6 +31,7 @@ public class Search {
         for (int i = rangeStart; i <= rangeEnd; i++) {
             if (isInvalid(i) == true) {
                 invalidCounter += 1;
+                invalidTotal += i;
             }
         }
     }

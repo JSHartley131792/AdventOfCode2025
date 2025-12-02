@@ -14,7 +14,7 @@ public class SearchTest {
     Search search;
     @BeforeEach
     public void setUpSearchState() {
-        search = new Search(0);
+        search = new Search();
     }
 
     @Test
@@ -36,5 +36,12 @@ public class SearchTest {
         search.invalidsInRange(11, 22);
         int expectedResult = 2;
         assertEquals(expectedResult, search.getCounter());
+    }
+    
+    @Test
+    public void canSumInvalidsInRange() {
+        search.invalidsInRange(11, 22);
+        int expectedResult = 33;
+        assertEquals(expectedResult, search.getInvalidTotal());
     }
 }
