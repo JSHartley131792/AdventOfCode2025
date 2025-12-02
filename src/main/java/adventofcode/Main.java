@@ -1,6 +1,7 @@
 package adventofcode;
 
 import adventofcode.dayOne.Rotations;
+import adventofcode.dayTwo.Search;
 
 public class Main {
     public static void main(String[] args) {
@@ -18,6 +19,11 @@ public class Main {
     }
     
     public static void dayTwo() {
-        System.out.println("Hello world");
+        Search search = new Search();
+        search.readRanges("main", "input");
+        System.out.println("The counter ended up at: ");
+        System.out.println(search.getCounter());
+        System.out.println("The total ended up at: ");
+        System.out.println(search.getInvalidTotal());
     }
 }
