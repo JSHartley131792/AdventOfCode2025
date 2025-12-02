@@ -16,4 +16,11 @@ public class SearchTest {
         boolean expectedResult = false;
         assertEquals(expectedResult, result);
     }
+    
+    @Test
+    public void canRecogniseInvalidIds() {
+        boolean result = Search.isInvalid(11);
+        boolean expectedResult = true;
+        assertEquals(expectedResult, result);
+    }
 }
