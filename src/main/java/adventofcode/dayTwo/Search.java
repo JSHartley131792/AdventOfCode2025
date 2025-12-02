@@ -2,6 +2,8 @@ package adventofcode.dayTwo;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 public class Search {
@@ -20,15 +22,24 @@ public class Search {
         return invalidTotal;
     }
 
+    public static List<String> splitStringIntoSections(String inputString, int sectionSize) {
+        List<String> sections = new ArrayList<>();
+        for (int i = 0; i < inputString.length(); i += sectionSize) {
+            sections.add(inputString.substring(i, Math.min(i + sectionSize, inputString.length())));
+        }
+        return sections;
+    }
+
     public boolean isInvalid(long i) {
         String numberString = String.valueOf(i);
-        if (numberString.length() % 2 == 0) {
-            String firstHalf = numberString.substring(0, (numberString.length() / 2));
-            String secondHalf = numberString.substring((numberString.length() / 2), numberString.length());
-            return firstHalf.equals(secondHalf);
-        } else {
-            return false;
+        int length = numberString.length();
+        for (int j = 1; j < length; j++) {
+            List<String> splitStrings = splitStringIntoSections(numberString, j);
+            boolean isInvalid = splitStrings.stream().distinct().count() == 1;
+            if (isInvalid == true)
+                return isInvalid;
         }
+        return false;
     }
 
     public void invalidsInRange(long rangeStart, long rangeEnd) {

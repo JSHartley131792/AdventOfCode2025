@@ -24,12 +24,12 @@ public class SearchTest {
         assertEquals(expectedResult, result);
     }
     
-    @Test
-    public void canRecogniseInvalidIds() {
-        boolean result = search.isInvalid(11);
-        boolean expectedResult = true;
-        assertEquals(expectedResult, result);
-    }
+    // @Test
+    // public void canRecogniseInvalidIds() {
+    //     boolean result = search.isInvalid(11);
+    //     boolean expectedResult = true;
+    //     assertEquals(expectedResult, result);
+    // }
 
     @Test
     public void canCountInvalidsInRange() {
@@ -45,20 +45,57 @@ public class SearchTest {
         assertEquals(expectedResult, search.getInvalidTotal());
     }
 
+    // @Test
+    // public void canParseMultipleRangesCommaSeparated() {
+    //     search.parseAndCalcRanges("11-22,95-115");
+    //     int expectedCounter = 3;
+    //     int expectedTotal = 132;
+    //     assertEquals(expectedCounter, search.getCounter());
+    //     assertEquals(expectedTotal, search.getInvalidTotal());
+    // }
+    
+    // @Test
+    // public void canReadFileOfRanges() {
+    //     search.readRanges("test", "input");
+    //     int expectedCounter = 8;
+    //     int expectedTotal = 1227775554;
+    //     assertEquals(expectedCounter, search.getCounter());
+    //     assertEquals(expectedTotal, search.getInvalidTotal());
+    // }
+    
+    // Now, an ID is invalid if it is made only of some sequence 
+    // of digits repeated at least twice. 
+    // So, 12341234 (1234 two times), 
+    // 123123123 (123 three times), 
+    // 1212121212 (12 five times), 
+    // and 1111111 (1 seven times) are all invalid IDs.
+    
     @Test
-    public void canParseMultipleRangesCommaSeparated() {
-        search.parseAndCalcRanges("11-22,95-115");
-        int expectedCounter = 3;
-        int expectedTotal = 132;
-        assertEquals(expectedCounter, search.getCounter());
-        assertEquals(expectedTotal, search.getInvalidTotal());
+    public void canRecogniseInvalidIds() {
+        boolean result = search.isInvalid(11);
+        boolean expectedResult = true;
+        assertEquals(expectedResult, result);
     }
     
     @Test
+    public void canRecogniseInvalidIdsThreeRepeats() {
+        boolean result = search.isInvalid(111);
+        boolean expectedResult = true;
+        assertEquals(expectedResult, result);
+    }
+    
+    @Test
+    public void canRecogniseInvalidIdsFiveRepeats() {
+        boolean result = search.isInvalid(1212121212);
+        boolean expectedResult = true;
+        assertEquals(expectedResult, result);
+    }
+
+    @Test
     public void canReadFileOfRanges() {
         search.readRanges("test", "input");
-        int expectedCounter = 8;
-        int expectedTotal = 1227775554;
+        long expectedCounter = 13;
+        long expectedTotal = Long.valueOf("4174379265");
         assertEquals(expectedCounter, search.getCounter());
         assertEquals(expectedTotal, search.getInvalidTotal());
     }
