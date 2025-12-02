@@ -44,4 +44,13 @@ public class SearchTest {
         int expectedResult = 33;
         assertEquals(expectedResult, search.getInvalidTotal());
     }
+
+    @Test
+    public void canParseMultipleRangesCommaSeparated() {
+        search.parseAndCalcRanges("11-22,95-115");
+        int expectedCounter = 3;
+        int expectedTotal = 132;
+        assertEquals(expectedCounter, search.getCounter());
+        assertEquals(expectedTotal, search.getInvalidTotal());
+    }
 }

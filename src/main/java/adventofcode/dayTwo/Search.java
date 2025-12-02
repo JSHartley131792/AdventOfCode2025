@@ -35,4 +35,15 @@ public class Search {
             }
         }
     }
+
+    public void parseAndCalcRanges(String inputString) {
+        String[] ranges = inputString.split(",");
+        for (String string : ranges) {
+            String[] rangeExtremes = string.split("-");
+            invalidsInRange(
+                Integer.parseInt(rangeExtremes[0]), 
+                Integer.parseInt(rangeExtremes[1])
+            );
+        }
+    }
 }
