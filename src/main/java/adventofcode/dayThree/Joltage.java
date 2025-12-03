@@ -2,17 +2,20 @@ package adventofcode.dayThree;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.math.BigInteger;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 import java.util.Scanner;
+import java.util.stream.Collectors;
 
 public class Joltage {
-    int totalJoltage;
+    BigInteger totalJoltage;
 
-    public Joltage() {}
+    public Joltage(BigInteger totalJoltage) {
+        this.totalJoltage = totalJoltage;
+    }
 
-    public int getTotalJoltage() {
+    public BigInteger getTotalJoltage() {
         return totalJoltage;
     }
 
@@ -25,28 +28,29 @@ public class Joltage {
         return sections;
     }
 
-    public void findJoltage(String joltageRatings) {
-        List<Integer> joltageDigits = splitIntIntoDigits(joltageRatings, 1);
-        int max = joltageDigits.stream().mapToInt(x -> x).max().getAsInt();
-        // protecting against max being the last digit
-        int countOfMax = Collections.frequency(joltageDigits, max);
-        if (countOfMax == 1) {
-            int indexOfMax = joltageDigits.indexOf(max);
-            if (indexOfMax + 1 == joltageDigits.size()) {
-                List<Integer> afterMax = joltageDigits.subList(0, joltageDigits.size() - 1);
-                int nextMax = afterMax.stream().mapToInt(x -> x).max().getAsInt();
-                totalJoltage += ((nextMax * 10) + max);
-            } else {
-                List<Integer> afterMax = joltageDigits.subList(indexOfMax + 1, joltageDigits.size());
-                int nextMax = afterMax.stream().mapToInt(x -> x).max().getAsInt();
-                totalJoltage += ((max * 10) + nextMax);
+    public void recursivelyFindMaxDigit(String joltageRatings, int index, int max, List<Integer> digits) {
+        if (max <= 0) return;
+        int newIndex = 0;
+        int largest = 0;
+        for (int i = index; i < joltageRatings.length()-max; i++) {
+            int num = Integer.parseInt(String.valueOf(joltageRatings.charAt(i)));
+            if (num > largest) {
+                largest = num;
+                newIndex = i;
             }
-        } else {
-            totalJoltage += ((max * 10) + max);
         }
+        digits.add(largest);
+        recursivelyFindMaxDigit(joltageRatings, newIndex+1, max-1, digits);
     }
 
-    public int readJoltages(String env, String fileName) {
+    public void findJoltage(String joltageRatings) {
+        List<Integer> digits = new ArrayList<>();
+        recursivelyFindMaxDigit(joltageRatings, 0, 12, digits);
+        String numberString = digits.stream().map(x -> x.toString()).collect(Collectors.joining());
+        totalJoltage = totalJoltage.add(new BigInteger(numberString));
+    }
+
+    public BigInteger readJoltages(String env, String fileName) {
         File rotationsFile = new File("src/" + env + "/resources/dayThree/" + fileName + ".txt");
         try (Scanner myReader = new Scanner(rotationsFile)) {
             while (myReader.hasNextLine()) {

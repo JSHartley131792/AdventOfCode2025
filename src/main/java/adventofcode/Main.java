@@ -1,5 +1,7 @@
 package adventofcode;
 
+import java.math.BigInteger;
+
 import adventofcode.dayOne.Rotations;
 import adventofcode.dayThree.Joltage;
 import adventofcode.dayTwo.Search;
@@ -30,7 +32,7 @@ public class Main {
     }
     
     public static void dayThree() {
-        Joltage joltage = new Joltage();
+        Joltage joltage = new Joltage(new BigInteger("0"));
         joltage.readJoltages("main", "input");
         System.out.println("The total ended up at: ");
         System.out.println(joltage.getTotalJoltage());
