@@ -66,4 +66,11 @@ public class JoltageTest {
         BigInteger expectedResult = new BigInteger("811111111119");
         assertEquals(expectedResult, joltage.getTotalJoltage());
     }
+
+    @Test
+    public void canReadFileOfJoltages() {
+        joltage.readJoltages("test", "input");
+        BigInteger expectedResult = new BigInteger("3121910778619");
+        assertEquals(expectedResult, joltage.getTotalJoltage());
+    }
 }
