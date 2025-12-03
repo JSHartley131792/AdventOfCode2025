@@ -6,7 +6,6 @@ import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
-import java.util.stream.Collectors;
 
 public class Joltage {
     BigInteger totalJoltage;
@@ -19,6 +18,16 @@ public class Joltage {
         return totalJoltage;
     }
 
+    public class MaxDigit {
+        int index;
+        int value;
+
+        public MaxDigit(int index,int value) {
+            this.index = index;
+            this.value = value;
+        }
+    }
+
     public List<Integer> splitIntIntoDigits(String inputString, int sectionSize) {
         List<Integer> sections = new ArrayList<>();
         for (int i = 0; i < inputString.length(); i += sectionSize) {
@@ -28,26 +37,29 @@ public class Joltage {
         return sections;
     }
 
-    public void recursivelyFindMaxDigit(String joltageRatings, int index, int max, List<Integer> digits) {
-        if (max <= 0) return;
+    public MaxDigit findMaxDigit(String joltageRatings, int index, int max) {
         int newIndex = 0;
         int largest = 0;
-        for (int i = index; i < joltageRatings.length()-max; i++) {
+        for (int i = index; i < joltageRatings.length() - max; i++) {
             int num = Integer.parseInt(String.valueOf(joltageRatings.charAt(i)));
             if (num > largest) {
                 largest = num;
                 newIndex = i;
             }
         }
-        digits.add(largest);
-        recursivelyFindMaxDigit(joltageRatings, newIndex+1, max-1, digits);
+        return new MaxDigit(newIndex, largest);
     }
 
     public void findJoltage(String joltageRatings) {
-        List<Integer> digits = new ArrayList<>();
-        recursivelyFindMaxDigit(joltageRatings, 0, 12, digits);
-        String numberString = digits.stream().map(x -> x.toString()).collect(Collectors.joining());
-        totalJoltage = totalJoltage.add(new BigInteger(numberString));
+        long result = 0;
+        int index = 0;
+        for (int i = 11; i >= 0; i--) {
+            MaxDigit max = findMaxDigit(joltageRatings, index, i);
+            index = max.index + 1;
+            long holdingValue = (long) (max.value * Math.pow(10, i));
+            result += holdingValue;
+        }
+        totalJoltage = totalJoltage.add(new BigInteger(String.valueOf(result)));
     }
 
     public BigInteger readJoltages(String env, String fileName) {
