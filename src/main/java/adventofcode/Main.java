@@ -1,12 +1,14 @@
 package adventofcode;
 
 import adventofcode.dayOne.Rotations;
+import adventofcode.dayThree.Joltage;
 import adventofcode.dayTwo.Search;
 
 public class Main {
     public static void main(String[] args) {
         // dayOne();
-        dayTwo();
+        // dayTwo();
+        dayThree();
     }
 
     public static void dayOne() {
@@ -25,5 +27,12 @@ public class Main {
         System.out.println(search.getCounter());
         System.out.println("The total ended up at: ");
         System.out.println(search.getInvalidTotal());
+    }
+    
+    public static void dayThree() {
+        Joltage joltage = new Joltage();
+        joltage.readJoltages("main", "input");
+        System.out.println("The total ended up at: ");
+        System.out.println(joltage.getTotalJoltage());
     }
 }

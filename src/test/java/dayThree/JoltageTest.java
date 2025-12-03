@@ -39,4 +39,11 @@ public class JoltageTest {
         int expectedResult = 89;
         assertEquals(expectedResult, joltage.getTotalJoltage());
     }
+
+    @Test
+    public void canReadFileOfJoltages() {
+        joltage.readJoltages("test", "input");
+        int expectedResult = 357;
+        assertEquals(expectedResult, joltage.getTotalJoltage());
+    }
 }

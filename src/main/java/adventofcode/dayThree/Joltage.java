@@ -1,8 +1,11 @@
 package adventofcode.dayThree;
 
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Scanner;
 
 public class Joltage {
     int totalJoltage;
@@ -41,5 +44,20 @@ public class Joltage {
         } else {
             totalJoltage += ((max * 10) + max);
         }
+    }
+
+    public int readJoltages(String env, String fileName) {
+        File rotationsFile = new File("src/" + env + "/resources/dayThree/" + fileName + ".txt");
+        try (Scanner myReader = new Scanner(rotationsFile)) {
+            while (myReader.hasNextLine()) {
+                String data = myReader.nextLine();
+                System.out.println(data);
+                findJoltage(data);
+            }
+        } catch (FileNotFoundException e) {
+            System.out.println("An error occurred.");
+            e.printStackTrace();
+        }
+        return totalJoltage;
     }
 }
