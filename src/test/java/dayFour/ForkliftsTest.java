@@ -237,4 +237,14 @@ public class ForkliftsTest {
         long expectedValue = 0;
         assertEquals(expectedValue, forklifts.getTotalAccess());
     }
+    
+    @Test
+    public void canRecursivelySolveExample() {
+        forklifts.readForklifts("test", "input");
+        forklifts.reEvaluateGrid();
+        long expectedRemaining = 28;
+        long expectedRemoved = 43;
+        assertEquals(expectedRemaining, forklifts.gridOfPaper.size());
+        assertEquals(expectedRemoved, forklifts.removedPaper);
+    }
 }
