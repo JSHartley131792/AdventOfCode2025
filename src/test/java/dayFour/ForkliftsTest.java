@@ -198,7 +198,7 @@ public class ForkliftsTest {
         assertEquals(expectedRemaining, forklifts.gridOfPaper.size());
         assertEquals(expectedRemoved, forklifts.removedPaper);
     }
-    
+
     @Test
     public void canRemoveAccessibleSmallGrid() {
         List<String> strings = new ArrayList<>();
@@ -212,7 +212,7 @@ public class ForkliftsTest {
         assertEquals(expectedRemaining, forklifts.gridOfPaper.size());
         assertEquals(expectedRemoved, forklifts.removedPaper);
     }
-    
+
     @Test
     public void canReEvaluateGrid() {
         List<String> strings = new ArrayList<>();
@@ -225,7 +225,7 @@ public class ForkliftsTest {
         long expectedValue = 4;
         assertEquals(expectedValue, forklifts.getTotalAccess());
     }
-   
+
     @Test
     public void canRecursivelyReEvaluateGridThatEndsInZero() {
         List<String> strings = new ArrayList<>();
@@ -237,7 +237,7 @@ public class ForkliftsTest {
         long expectedValue = 0;
         assertEquals(expectedValue, forklifts.getTotalAccess());
     }
-    
+
     @Test
     public void canRecursivelySolveExample() {
         forklifts.readForklifts("test", "input");

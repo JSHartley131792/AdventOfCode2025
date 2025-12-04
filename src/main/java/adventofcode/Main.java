@@ -43,7 +43,10 @@ public class Main {
     public static void dayFour() {
         Forklifts forklifts = new Forklifts();
         forklifts.readForklifts("main", "input");
+        forklifts.reEvaluateGrid();
         System.out.println("The total ended up at: ");
         System.out.println(forklifts.getTotalAccess());
+        System.out.println("The total removed ended up at: ");
+        System.out.println(forklifts.removedPaper);
     }
 }

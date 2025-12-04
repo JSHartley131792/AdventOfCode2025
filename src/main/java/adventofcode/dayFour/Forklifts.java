@@ -41,7 +41,7 @@ public class Forklifts {
         public boolean getValue() {
             return this.isPaper;
         }
-        
+
         public void setValue(boolean override) {
             this.isPaper = override;
         }
@@ -56,7 +56,7 @@ public class Forklifts {
     }
 
     public List<Position> grid = new ArrayList<>();
-    
+
     public List<Position> gridOfPaper = new ArrayList<>();
 
     public long removedPaper = 0;
@@ -70,7 +70,7 @@ public class Forklifts {
     public Position getPositionByAxis(int desiredX, int desiredY) {
         return this.grid.stream().filter(x -> x.xAxis == desiredX && x.yAxis == desiredY).toList().get(0);
     }
-    
+
     public Position getPositionOfPaperByAxis(int desiredX, int desiredY) {
         return this.gridOfPaper.stream().filter(x -> x.xAxis == desiredX && x.yAxis == desiredY).toList().get(0);
     }
@@ -97,7 +97,8 @@ public class Forklifts {
                 boolean isPaper = (line.charAt(xIndex) == '@');
                 Position position = new Position(xIndex, yIndex, isPaper);
                 grid.add(position);
-                if (isPaper) gridOfPaper.add(position);
+                if (isPaper)
+                    gridOfPaper.add(position);
             }
         }
         for (Position position : gridOfPaper) {
@@ -134,7 +135,7 @@ public class Forklifts {
         try (Scanner myReader = new Scanner(forkliftsFile)) {
             while (myReader.hasNextLine()) {
                 String data = myReader.nextLine();
-                System.out.println(data);
+                // System.out.println(data);
                 strings.add(data);
             }
         } catch (FileNotFoundException e) {
@@ -163,13 +164,16 @@ public class Forklifts {
             position.setCanAccess();
         }
     }
-    
+
     public void reEvaluateGrid() {
         long hasAccessible = gridOfPaper.stream().filter(x -> x.canAccess).count();
-        while (hasAccessible > 0) { 
+        long counter = 0;
+        while (hasAccessible > 0) {
+            counter +=1;
             removeAccessible();
             evaluateGrid();
             hasAccessible = gridOfPaper.stream().filter(x -> x.canAccess).count();
+            System.out.println(counter);
         }
     }
 }
