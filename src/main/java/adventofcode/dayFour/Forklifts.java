@@ -8,11 +8,20 @@ public class Forklifts {
         int xAxis;
         int yAxis;
         boolean isPaper;
+        int nearbyPaperCount;
 
         public Position(int xAxis, int yAxis, boolean isPaper) {
             this.xAxis = xAxis;
             this.yAxis = yAxis;
             this.isPaper = isPaper;
+        }
+
+        public int getNearbyPaper() {
+            return this.nearbyPaperCount;
+        }
+
+        public void setNearbyPaper(int value) {
+            this.nearbyPaperCount = value;
         }
 
         public int getX() {
@@ -49,5 +58,9 @@ public class Forklifts {
                 grid.add(new Position(xIndex + 1, yIndex + 1, isPaper));
             }
         }
+    }
+
+    public void findNearbyPaper(int i, int j) {
+        this.getPositionByAxis(i, j).setNearbyPaper(0);
     }
 }

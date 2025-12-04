@@ -101,4 +101,16 @@ public class ForkliftsTest {
         assertEquals(resultPosition.getY(), expectedPosition.getY());
         assertEquals(resultPosition.getValue(), expectedPosition.getValue());
     }
+
+    @Test
+    public void canDiscoverNeighbouringPaper() {
+        List<String> strings = new ArrayList<>();
+        strings.add("...");
+        strings.add("...");
+        strings.add("...");
+        forklifts.applyGrid(strings);
+        forklifts.findNearbyPaper(2, 2);
+        int expectedResult = 0;
+        assertEquals(forklifts.getPositionByAxis(2, 2).getNearbyPaper(), expectedResult);
+    }
 }
