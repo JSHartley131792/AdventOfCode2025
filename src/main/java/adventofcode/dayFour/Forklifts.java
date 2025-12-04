@@ -41,11 +41,11 @@ public class Forklifts {
         public boolean getValue() {
             return this.isPaper;
         }
-        
+
         public void setCanAccess() {
             this.canAccess = this.isPaper && this.nearbyPaperCount < 4;
         }
-        
+
         public boolean getCanAccess() {
             return this.isPaper && this.nearbyPaperCount < 4;
         }
@@ -68,7 +68,7 @@ public class Forklifts {
     public int getAxisMaxY() {
         return Collections.max(this.grid, Comparator.comparing(x -> x.yAxis)).yAxis;
     }
-    
+
     public long getTotalAccess() {
         return this.grid.stream().filter(x -> x.canAccess == true).count();
     }
@@ -108,5 +108,22 @@ public class Forklifts {
             }
         }
         this.getPositionByAxis(xAxis, yAxis).setNearbyPaper(count);
+    }
+
+    public long readForklifts(String env, String fileName) {
+        List<String> strings = new ArrayList<>();
+        File forkliftsFile = new File("src/" + env + "/resources/dayFour/" + fileName + ".txt");
+        try (Scanner myReader = new Scanner(forkliftsFile)) {
+            while (myReader.hasNextLine()) {
+                String data = myReader.nextLine();
+                System.out.println(data);
+                strings.add(data);
+            }
+        } catch (FileNotFoundException e) {
+            System.out.println("An error occurred.");
+            e.printStackTrace();
+        }
+        applyGrid(strings);
+        return getTotalAccess();
     }
 }

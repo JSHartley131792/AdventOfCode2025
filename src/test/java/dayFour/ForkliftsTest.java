@@ -33,7 +33,7 @@ public class ForkliftsTest {
         assertEquals(forklifts.grid.get(0).getY(), expectedGridPosition.getY());
         assertEquals(forklifts.grid.get(0).getValue(), expectedGridPosition.getValue());
     }
-    
+
     @Test
     public void canApplyPositionWithinGridForPaper() {
         List<String> strings = new ArrayList<>();
@@ -64,7 +64,7 @@ public class ForkliftsTest {
         assertEquals(forklifts.grid.get(1).getY(), expectedSecondGridPosition.getY());
         assertEquals(forklifts.grid.get(1).getValue(), expectedSecondGridPosition.getValue());
     }
-    
+
     @Test
     public void canApplyPositionWithinGridForMultipleStrings() {
         List<String> strings = new ArrayList<>();
@@ -113,7 +113,7 @@ public class ForkliftsTest {
         int expectedResult = 0;
         assertEquals(forklifts.getPositionByAxis(2, 2).getNearbyPaper(), expectedResult);
     }
-    
+
     @Test
     public void canDiscoverNeighbouringPaperWhenSurrounded() {
         List<String> strings = new ArrayList<>();
@@ -125,7 +125,7 @@ public class ForkliftsTest {
         int expectedResult = 8;
         assertEquals(expectedResult, forklifts.getPositionByAxis(2, 2).getNearbyPaper());
     }
-    
+
     @Test
     public void canDiscoverLessThanFour() {
         List<String> strings = new ArrayList<>();
@@ -137,7 +137,7 @@ public class ForkliftsTest {
         boolean expectedResult = false;
         assertEquals(expectedResult, forklifts.getPositionByAxis(2, 2).getCanAccess());
     }
-    
+
     @Test
     public void canDiscoverLessThanFourWhenPossible() {
         List<String> strings = new ArrayList<>();
@@ -148,8 +148,7 @@ public class ForkliftsTest {
         boolean expectedResult = true;
         assertEquals(expectedResult, forklifts.getPositionByAxis(2, 2).getCanAccess());
     }
-    
-    
+
     @Test
     public void canDiscoverLessThanFourWhenPossibleLargerGrid() {
         List<String> strings = new ArrayList<>();
@@ -161,7 +160,7 @@ public class ForkliftsTest {
         boolean expectedResult = true;
         assertEquals(expectedResult, forklifts.getPositionByAxis(3, 1).getCanAccess());
     }
-    
+
     @Test
     public void canGetCountForGrid() {
         List<String> strings = new ArrayList<>();
@@ -171,7 +170,7 @@ public class ForkliftsTest {
         long expectedResult = 2;
         assertEquals(expectedResult, forklifts.getTotalAccess());
     }
-    
+
     @Test
     public void canGetCountForGridWhenNone() {
         List<String> strings = new ArrayList<>();
@@ -182,5 +181,10 @@ public class ForkliftsTest {
         long expectedResult = 4;
         assertEquals(expectedResult, forklifts.getTotalAccess());
     }
-    
+
+    @Test
+    public void canReadFileIn() {
+        long expectedResult = 13;
+        assertEquals(expectedResult, forklifts.readForklifts("test", "input"));
+    }
 }
