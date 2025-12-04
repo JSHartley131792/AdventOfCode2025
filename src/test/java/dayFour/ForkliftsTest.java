@@ -198,4 +198,31 @@ public class ForkliftsTest {
         assertEquals(expectedRemaining, forklifts.gridOfPaper.size());
         assertEquals(expectedRemoved, forklifts.removedPaper);
     }
+    
+    @Test
+    public void canRemoveAccessibleSmallGrid() {
+        List<String> strings = new ArrayList<>();
+        strings.add("@@@");
+        strings.add("@@@");
+        strings.add("@@@");
+        forklifts.applyGrid(strings);
+        long expectedRemaining = 5;
+        long expectedRemoved = 4;
+        forklifts.removeAccessible();
+        assertEquals(expectedRemaining, forklifts.gridOfPaper.size());
+        assertEquals(expectedRemoved, forklifts.removedPaper);
+    }
+    
+    @Test
+    public void canReEvaluateGrid() {
+        List<String> strings = new ArrayList<>();
+        strings.add("@@@");
+        strings.add("@@@");
+        strings.add("@@@");
+        forklifts.applyGrid(strings);
+        forklifts.removeAccessible();
+        forklifts.evaluateGrid();
+        long expectedValue = 4;
+        assertEquals(expectedValue, forklifts.getTotalAccess());
+    }
 }

@@ -41,6 +41,10 @@ public class Forklifts {
         public boolean getValue() {
             return this.isPaper;
         }
+        
+        public void setValue(boolean override) {
+            this.isPaper = override;
+        }
 
         public void setCanAccess() {
             this.canAccess = this.isPaper && this.nearbyPaperCount < 4;
@@ -140,6 +144,19 @@ public class Forklifts {
 
     public void removeAccessible() {
         removedPaper += gridOfPaper.stream().filter(x -> x.canAccess).count();
+        List<Position> gridToRemove = gridOfPaper.stream().filter(x -> x.canAccess).toList();
         gridOfPaper.removeIf(x -> x.canAccess);
+        for (Position position : gridToRemove) {
+            position.setValue(false);
+        }
+    }
+
+    public void evaluateGrid() {
+        for (Position position : grid) {
+            findNearbyPaper(position.xAxis, position.yAxis);
+        }
+        for (Position position : grid) {
+            position.setCanAccess();
+        }
     }
 }
