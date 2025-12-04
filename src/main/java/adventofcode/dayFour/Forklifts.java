@@ -17,6 +17,7 @@ public class Forklifts {
             this.xAxis = xAxis;
             this.yAxis = yAxis;
             this.isPaper = isPaper;
+            setCanAccess();
         }
 
         public int getNearbyPaper() {
@@ -37,6 +38,10 @@ public class Forklifts {
 
         public boolean getValue() {
             return this.isPaper;
+        }
+        
+        public void setCanAccess() {
+            this.canAccess = this.isPaper && this.nearbyPaperCount < 4;
         }
         
         public boolean getCanAccess() {
@@ -60,6 +65,10 @@ public class Forklifts {
 
     public int getAxisMaxY() {
         return Collections.max(this.grid, Comparator.comparing(x -> x.yAxis)).yAxis;
+    }
+    
+    public long getTotalAccess() {
+        return this.grid.stream().filter(x -> x.canAccess == true).count();
     }
 
     public Forklifts() {

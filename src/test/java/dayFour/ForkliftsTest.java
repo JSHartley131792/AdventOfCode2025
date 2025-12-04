@@ -148,4 +148,14 @@ public class ForkliftsTest {
         boolean expectedResult = true;
         assertEquals(expectedResult, forklifts.getPositionByAxis(2, 2).getCanAccess());
     }
+    
+    @Test
+    public void canGetCountForGrid() {
+        List<String> strings = new ArrayList<>();
+        strings.add("@.");
+        strings.add(".@");
+        forklifts.applyGrid(strings);
+        long expectedResult = 2;
+        assertEquals(expectedResult, forklifts.getTotalAccess());
+    }
 }
