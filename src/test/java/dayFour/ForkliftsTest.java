@@ -225,4 +225,16 @@ public class ForkliftsTest {
         long expectedValue = 4;
         assertEquals(expectedValue, forklifts.getTotalAccess());
     }
+   
+    @Test
+    public void canRecursivelyReEvaluateGridThatEndsInZero() {
+        List<String> strings = new ArrayList<>();
+        strings.add("@@@");
+        strings.add("@@@");
+        strings.add("@@@");
+        forklifts.applyGrid(strings);
+        forklifts.reEvaluateGrid();
+        long expectedValue = 0;
+        assertEquals(expectedValue, forklifts.getTotalAccess());
+    }
 }

@@ -61,6 +61,8 @@ public class Forklifts {
 
     public long removedPaper = 0;
 
+    public long removedInOneGo;
+
     public List<Position> getPosition() {
         return this.grid;
     }
@@ -143,7 +145,9 @@ public class Forklifts {
     }
 
     public void removeAccessible() {
-        removedPaper += gridOfPaper.stream().filter(x -> x.canAccess).count();
+        long removed = gridOfPaper.stream().filter(x -> x.canAccess).count();
+        removedPaper += removed;
+        removedInOneGo = removed;
         List<Position> gridToRemove = gridOfPaper.stream().filter(x -> x.canAccess).toList();
         gridOfPaper.removeIf(x -> x.canAccess);
         for (Position position : gridToRemove) {
@@ -157,6 +161,15 @@ public class Forklifts {
         }
         for (Position position : grid) {
             position.setCanAccess();
+        }
+    }
+    
+    public void reEvaluateGrid() {
+        long hasAccessible = gridOfPaper.stream().filter(x -> x.canAccess).count();
+        while (hasAccessible > 0) { 
+            removeAccessible();
+            evaluateGrid();
+            hasAccessible = gridOfPaper.stream().filter(x -> x.canAccess).count();
         }
     }
 }
