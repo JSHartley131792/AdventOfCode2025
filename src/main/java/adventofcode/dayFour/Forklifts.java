@@ -1,6 +1,8 @@
 package adventofcode.dayFour;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 public class Forklifts {
@@ -47,6 +49,14 @@ public class Forklifts {
         return this.grid.stream().filter(x -> x.xAxis == desiredX && x.yAxis == desiredY).toList().get(0);
     }
 
+    public int getAxisMaxX() {
+        return Collections.max(this.grid, Comparator.comparing(x -> x.xAxis)).xAxis;
+    }
+
+    public int getAxisMaxY() {
+        return Collections.max(this.grid, Comparator.comparing(x -> x.yAxis)).yAxis;
+    }
+
     public Forklifts() {
     };
 
@@ -60,7 +70,23 @@ public class Forklifts {
         }
     }
 
-    public void findNearbyPaper(int i, int j) {
-        this.getPositionByAxis(i, j).setNearbyPaper(0);
+    public void findNearbyPaper(int xAxis, int yAxis) {
+        int maxX = getAxisMaxX();
+        int maxY = getAxisMaxY();
+        int count = 0;
+        for (int xSearch = 1; xSearch <= maxX; xSearch++) {
+            for (int ySearch = 1; ySearch <= maxY; ySearch++) {
+                if (Math.abs(xAxis - ySearch) < 2 && Math.abs(yAxis - xSearch) < 2) {
+                    if (xSearch == xAxis && yAxis == ySearch) {
+                        continue;
+                    } else {
+                        if (getPositionByAxis(xSearch, ySearch).getValue()) {
+                            count += 1;
+                        }
+                    }
+                }
+            }
+        }
+        this.getPositionByAxis(xAxis, yAxis).setNearbyPaper(count);
     }
 }

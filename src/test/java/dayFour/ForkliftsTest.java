@@ -113,4 +113,16 @@ public class ForkliftsTest {
         int expectedResult = 0;
         assertEquals(forklifts.getPositionByAxis(2, 2).getNearbyPaper(), expectedResult);
     }
+    
+    @Test
+    public void canDiscoverNeighbouringPaperWhenSurrounded() {
+        List<String> strings = new ArrayList<>();
+        strings.add("@@@");
+        strings.add("@@@");
+        strings.add("@@@");
+        forklifts.applyGrid(strings);
+        forklifts.findNearbyPaper(2, 2);
+        int expectedResult = 8;
+        assertEquals(expectedResult, forklifts.getPositionByAxis(2, 2).getNearbyPaper());
+    }
 }
