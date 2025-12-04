@@ -11,6 +11,7 @@ public class Forklifts {
         int yAxis;
         boolean isPaper;
         int nearbyPaperCount;
+        boolean canAccess;
 
         public Position(int xAxis, int yAxis, boolean isPaper) {
             this.xAxis = xAxis;
@@ -36,6 +37,10 @@ public class Forklifts {
 
         public boolean getValue() {
             return this.isPaper;
+        }
+        
+        public boolean getCanAccess() {
+            return this.isPaper && this.nearbyPaperCount < 4;
         }
     }
 

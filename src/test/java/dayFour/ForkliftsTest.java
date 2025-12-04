@@ -125,4 +125,27 @@ public class ForkliftsTest {
         int expectedResult = 8;
         assertEquals(expectedResult, forklifts.getPositionByAxis(2, 2).getNearbyPaper());
     }
+    
+    @Test
+    public void canDiscoverLessThanFour() {
+        List<String> strings = new ArrayList<>();
+        strings.add("@@@");
+        strings.add("@@@");
+        strings.add("@@@");
+        forklifts.applyGrid(strings);
+        forklifts.findNearbyPaper(2, 2);
+        boolean expectedResult = false;
+        assertEquals(expectedResult, forklifts.getPositionByAxis(2, 2).getCanAccess());
+    }
+    
+    @Test
+    public void canDiscoverLessThanFourWhenPossible() {
+        List<String> strings = new ArrayList<>();
+        strings.add("@.");
+        strings.add(".@");
+        forklifts.applyGrid(strings);
+        forklifts.findNearbyPaper(2, 2);
+        boolean expectedResult = true;
+        assertEquals(expectedResult, forklifts.getPositionByAxis(2, 2).getCanAccess());
+    }
 }
