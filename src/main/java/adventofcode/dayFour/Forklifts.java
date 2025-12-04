@@ -38,6 +38,7 @@ public class Forklifts {
     public Forklifts() {};
 
     public void applyGrid(String input) {
-        grid.add(new Position(1, 1, false));
+        boolean isPaper = input.matches("@");
+        grid.add(new Position(1, 1, isPaper));
     }
 }
