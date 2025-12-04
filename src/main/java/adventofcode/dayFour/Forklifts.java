@@ -135,8 +135,4 @@ public class Forklifts {
         }
         applyGrid(strings);
     }
-
-    public List<Position> findAccessible() {
-        return grid.stream().filter(x -> x.canAccess == true).toList();
-    }
 }
