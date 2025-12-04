@@ -81,7 +81,7 @@ public class Forklifts {
             String line = input.get(yIndex);
             for (int xIndex = 0; xIndex < line.length(); xIndex++) {
                 boolean isPaper = (line.charAt(xIndex) == '@');
-                grid.add(new Position(xIndex + 1, yIndex + 1, isPaper));
+                grid.add(new Position(xIndex, yIndex, isPaper));
             }
         }
         for (Position position : grid) {
@@ -94,8 +94,8 @@ public class Forklifts {
         int maxX = getAxisMaxX();
         int maxY = getAxisMaxY();
         int count = 0;
-        for (int xSearch = 1; xSearch <= maxX; xSearch++) {
-            for (int ySearch = 1; ySearch <= maxY; ySearch++) {
+        for (int xSearch = 0; xSearch <= maxX; xSearch++) {
+            for (int ySearch = 0; ySearch <= maxY; ySearch++) {
                 if (Math.abs(xAxis - xSearch) < 2 && Math.abs(yAxis - ySearch) < 2) {
                     if (xSearch == xAxis && yAxis == ySearch) {
                         continue;
@@ -124,5 +124,9 @@ public class Forklifts {
             e.printStackTrace();
         }
         applyGrid(strings);
+    }
+
+    public List<Position> findAccessible() {
+        return grid.stream().filter(x -> x.canAccess == true).toList();
     }
 }

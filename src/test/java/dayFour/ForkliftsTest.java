@@ -3,6 +3,7 @@ package dayFour;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import org.junit.jupiter.api.BeforeEach;
@@ -24,8 +25,8 @@ public class ForkliftsTest {
         List<String> strings = new ArrayList<>();
         String input = ".";
         strings.add(input);
-        int expectedX = 1;
-        int expectedY = 1;
+        int expectedX = 0;
+        int expectedY = 0;
         boolean expectedValue = false;
         Position expectedGridPosition = forklifts.new Position(expectedX, expectedY, expectedValue);
         forklifts.applyGrid(strings);
@@ -39,8 +40,8 @@ public class ForkliftsTest {
         List<String> strings = new ArrayList<>();
         String input = "@";
         strings.add(input);
-        int expectedX = 1;
-        int expectedY = 1;
+        int expectedX = 0;
+        int expectedY = 0;
         boolean expectedValue = true;
         Position expectedGridPosition = forklifts.new Position(expectedX, expectedY, expectedValue);
         forklifts.applyGrid(strings);
@@ -54,8 +55,8 @@ public class ForkliftsTest {
         List<String> strings = new ArrayList<>();
         String input = ".@";
         strings.add(input);
-        Position expectedFirstGridPosition = forklifts.new Position(1, 1, false);
-        Position expectedSecondGridPosition = forklifts.new Position(2, 1, true);
+        Position expectedFirstGridPosition = forklifts.new Position(0, 0, false);
+        Position expectedSecondGridPosition = forklifts.new Position(1, 0, true);
         forklifts.applyGrid(strings);
         assertEquals(forklifts.grid.get(0).getX(), expectedFirstGridPosition.getX());
         assertEquals(forklifts.grid.get(0).getY(), expectedFirstGridPosition.getY());
@@ -70,10 +71,10 @@ public class ForkliftsTest {
         List<String> strings = new ArrayList<>();
         strings.add(".@");
         strings.add("@.");
-        Position expectedOneOnePosition = forklifts.new Position(1, 1, false);
-        Position expectedTwoOnePosition = forklifts.new Position(2, 1, true);
-        Position expectedOneTwoPosition = forklifts.new Position(1, 2, true);
-        Position expectedTwoTwoPosition = forklifts.new Position(2, 2, false);
+        Position expectedOneOnePosition = forklifts.new Position(0, 0, false);
+        Position expectedTwoOnePosition = forklifts.new Position(1, 0, true);
+        Position expectedOneTwoPosition = forklifts.new Position(0, 1, true);
+        Position expectedTwoTwoPosition = forklifts.new Position(1, 1, false);
         forklifts.applyGrid(strings);
         assertEquals(forklifts.grid.get(0).getX(), expectedOneOnePosition.getX());
         assertEquals(forklifts.grid.get(0).getY(), expectedOneOnePosition.getY());
@@ -94,9 +95,9 @@ public class ForkliftsTest {
         List<String> strings = new ArrayList<>();
         strings.add(".@");
         strings.add("@.");
-        Position expectedPosition = forklifts.new Position(2, 2, false);
+        Position expectedPosition = forklifts.new Position(1, 1, false);
         forklifts.applyGrid(strings);
-        Position resultPosition = forklifts.getPositionByAxis(2, 2);
+        Position resultPosition = forklifts.getPositionByAxis(1, 1);
         assertEquals(resultPosition.getX(), expectedPosition.getX());
         assertEquals(resultPosition.getY(), expectedPosition.getY());
         assertEquals(resultPosition.getValue(), expectedPosition.getValue());
@@ -109,9 +110,9 @@ public class ForkliftsTest {
         strings.add("...");
         strings.add("...");
         forklifts.applyGrid(strings);
-        forklifts.findNearbyPaper(2, 2);
+        forklifts.findNearbyPaper(1, 1);
         int expectedResult = 0;
-        assertEquals(forklifts.getPositionByAxis(2, 2).getNearbyPaper(), expectedResult);
+        assertEquals(forklifts.getPositionByAxis(1, 1).getNearbyPaper(), expectedResult);
     }
 
     @Test
@@ -121,9 +122,9 @@ public class ForkliftsTest {
         strings.add("@@@");
         strings.add("@@@");
         forklifts.applyGrid(strings);
-        forklifts.findNearbyPaper(2, 2);
+        forklifts.findNearbyPaper(1, 1);
         int expectedResult = 8;
-        assertEquals(expectedResult, forklifts.getPositionByAxis(2, 2).getNearbyPaper());
+        assertEquals(expectedResult, forklifts.getPositionByAxis(1, 1).getNearbyPaper());
     }
 
     @Test
@@ -133,9 +134,9 @@ public class ForkliftsTest {
         strings.add("@@@");
         strings.add("@@@");
         forklifts.applyGrid(strings);
-        forklifts.findNearbyPaper(2, 2);
+        forklifts.findNearbyPaper(1, 1);
         boolean expectedResult = false;
-        assertEquals(expectedResult, forklifts.getPositionByAxis(2, 2).getCanAccess());
+        assertEquals(expectedResult, forklifts.getPositionByAxis(1, 1).getCanAccess());
     }
 
     @Test
@@ -144,9 +145,9 @@ public class ForkliftsTest {
         strings.add("@.");
         strings.add(".@");
         forklifts.applyGrid(strings);
-        forklifts.findNearbyPaper(2, 2);
+        forklifts.findNearbyPaper(1, 1);
         boolean expectedResult = true;
-        assertEquals(expectedResult, forklifts.getPositionByAxis(2, 2).getCanAccess());
+        assertEquals(expectedResult, forklifts.getPositionByAxis(1, 1).getCanAccess());
     }
 
     @Test
@@ -156,9 +157,9 @@ public class ForkliftsTest {
         strings.add("@@@");
         strings.add("@@@");
         forklifts.applyGrid(strings);
-        forklifts.findNearbyPaper(3, 1);
+        forklifts.findNearbyPaper(2, 0);
         boolean expectedResult = true;
-        assertEquals(expectedResult, forklifts.getPositionByAxis(3, 1).getCanAccess());
+        assertEquals(expectedResult, forklifts.getPositionByAxis(2, 0).getCanAccess());
     }
 
     @Test
