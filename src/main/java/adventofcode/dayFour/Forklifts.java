@@ -52,6 +52,8 @@ public class Forklifts {
     }
 
     public List<Position> grid = new ArrayList<>();
+    
+    public List<Position> gridOfPaper = new ArrayList<>();
 
     public List<Position> getPosition() {
         return this.grid;
@@ -59,6 +61,10 @@ public class Forklifts {
 
     public Position getPositionByAxis(int desiredX, int desiredY) {
         return this.grid.stream().filter(x -> x.xAxis == desiredX && x.yAxis == desiredY).toList().get(0);
+    }
+    
+    public Position getPositionOfPaperByAxis(int desiredX, int desiredY) {
+        return this.gridOfPaper.stream().filter(x -> x.xAxis == desiredX && x.yAxis == desiredY).toList().get(0);
     }
 
     public int getAxisMaxX() {
@@ -81,7 +87,9 @@ public class Forklifts {
             String line = input.get(yIndex);
             for (int xIndex = 0; xIndex < line.length(); xIndex++) {
                 boolean isPaper = (line.charAt(xIndex) == '@');
-                grid.add(new Position(xIndex, yIndex, isPaper));
+                Position position = new Position(xIndex, yIndex, isPaper);
+                grid.add(position);
+                if (isPaper) gridOfPaper.add(position);
             }
         }
         for (Position position : grid) {
@@ -94,10 +102,12 @@ public class Forklifts {
         int maxX = getAxisMaxX();
         int maxY = getAxisMaxY();
         int count = 0;
-        for (int xSearch = 0; xSearch <= maxX; xSearch++) {
-            for (int ySearch = 0; ySearch <= maxY; ySearch++) {
+        for (int xSearch = xAxis - 1; xSearch <= xAxis + 1; xSearch++) {
+            for (int ySearch = yAxis - 1; ySearch <= yAxis + 1; ySearch++) {
                 if (Math.abs(xAxis - xSearch) < 2 && Math.abs(yAxis - ySearch) < 2) {
                     if (xSearch == xAxis && yAxis == ySearch) {
+                        continue;
+                    } else if(xSearch < 0 || xSearch > maxX || ySearch < 0 || ySearch > maxY) {
                         continue;
                     } else {
                         if (getPositionByAxis(xSearch, ySearch).getValue()) {
