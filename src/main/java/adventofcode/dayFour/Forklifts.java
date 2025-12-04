@@ -110,7 +110,7 @@ public class Forklifts {
         this.getPositionByAxis(xAxis, yAxis).setNearbyPaper(count);
     }
 
-    public long readForklifts(String env, String fileName) {
+    public void readForklifts(String env, String fileName) {
         List<String> strings = new ArrayList<>();
         File forkliftsFile = new File("src/" + env + "/resources/dayFour/" + fileName + ".txt");
         try (Scanner myReader = new Scanner(forkliftsFile)) {
@@ -124,6 +124,5 @@ public class Forklifts {
             e.printStackTrace();
         }
         applyGrid(strings);
-        return getTotalAccess();
     }
 }

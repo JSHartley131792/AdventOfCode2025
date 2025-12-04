@@ -184,7 +184,8 @@ public class ForkliftsTest {
 
     @Test
     public void canReadFileIn() {
+        forklifts.readForklifts("test", "input");
         long expectedResult = 13;
-        assertEquals(expectedResult, forklifts.readForklifts("test", "input"));
+        assertEquals(expectedResult, forklifts.getTotalAccess());
     }
 }

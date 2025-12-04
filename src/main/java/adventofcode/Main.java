@@ -2,6 +2,7 @@ package adventofcode;
 
 import java.math.BigInteger;
 
+import adventofcode.dayFour.Forklifts;
 import adventofcode.dayOne.Rotations;
 import adventofcode.dayThree.Joltage;
 import adventofcode.dayTwo.Search;
@@ -10,7 +11,8 @@ public class Main {
     public static void main(String[] args) {
         // dayOne();
         // dayTwo();
-        dayThree();
+        // dayThree();
+        dayFour();
     }
 
     public static void dayOne() {
@@ -36,5 +38,12 @@ public class Main {
         joltage.readJoltages("main", "input");
         System.out.println("The total ended up at: ");
         System.out.println(joltage.getTotalJoltage());
+    }
+    
+    public static void dayFour() {
+        Forklifts forklifts = new Forklifts();
+        forklifts.readForklifts("main", "input");
+        System.out.println("The total ended up at: ");
+        System.out.println(forklifts.getTotalAccess());
     }
 }
