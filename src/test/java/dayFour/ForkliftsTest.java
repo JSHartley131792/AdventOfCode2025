@@ -149,6 +149,19 @@ public class ForkliftsTest {
         assertEquals(expectedResult, forklifts.getPositionByAxis(2, 2).getCanAccess());
     }
     
+    
+    @Test
+    public void canDiscoverLessThanFourWhenPossibleLargerGrid() {
+        List<String> strings = new ArrayList<>();
+        strings.add("@@@");
+        strings.add("@@@");
+        strings.add("@@@");
+        forklifts.applyGrid(strings);
+        forklifts.findNearbyPaper(3, 1);
+        boolean expectedResult = true;
+        assertEquals(expectedResult, forklifts.getPositionByAxis(3, 1).getCanAccess());
+    }
+    
     @Test
     public void canGetCountForGrid() {
         List<String> strings = new ArrayList<>();
@@ -158,4 +171,16 @@ public class ForkliftsTest {
         long expectedResult = 2;
         assertEquals(expectedResult, forklifts.getTotalAccess());
     }
+    
+    @Test
+    public void canGetCountForGridWhenNone() {
+        List<String> strings = new ArrayList<>();
+        strings.add("@@@");
+        strings.add("@@@");
+        strings.add("@@@");
+        forklifts.applyGrid(strings);
+        long expectedResult = 4;
+        assertEquals(expectedResult, forklifts.getTotalAccess());
+    }
+    
 }

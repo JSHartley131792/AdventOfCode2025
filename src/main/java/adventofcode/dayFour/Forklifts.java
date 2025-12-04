@@ -1,9 +1,12 @@
 package adventofcode.dayFour;
 
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
+import java.util.Scanner;
 
 public class Forklifts {
     public class Position {
@@ -17,7 +20,6 @@ public class Forklifts {
             this.xAxis = xAxis;
             this.yAxis = yAxis;
             this.isPaper = isPaper;
-            setCanAccess();
         }
 
         public int getNearbyPaper() {
@@ -82,6 +84,10 @@ public class Forklifts {
                 grid.add(new Position(xIndex + 1, yIndex + 1, isPaper));
             }
         }
+        for (Position position : grid) {
+            findNearbyPaper(position.xAxis, position.yAxis);
+            position.setCanAccess();
+        }
     }
 
     public void findNearbyPaper(int xAxis, int yAxis) {
@@ -90,7 +96,7 @@ public class Forklifts {
         int count = 0;
         for (int xSearch = 1; xSearch <= maxX; xSearch++) {
             for (int ySearch = 1; ySearch <= maxY; ySearch++) {
-                if (Math.abs(xAxis - ySearch) < 2 && Math.abs(yAxis - xSearch) < 2) {
+                if (Math.abs(xAxis - xSearch) < 2 && Math.abs(yAxis - ySearch) < 2) {
                     if (xSearch == xAxis && yAxis == ySearch) {
                         continue;
                     } else {
