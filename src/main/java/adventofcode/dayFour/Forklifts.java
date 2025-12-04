@@ -55,6 +55,8 @@ public class Forklifts {
     
     public List<Position> gridOfPaper = new ArrayList<>();
 
+    public long removedPaper = 0;
+
     public List<Position> getPosition() {
         return this.grid;
     }
@@ -134,5 +136,10 @@ public class Forklifts {
             e.printStackTrace();
         }
         applyGrid(strings);
+    }
+
+    public void removeAccessible() {
+        removedPaper += gridOfPaper.stream().filter(x -> x.canAccess).count();
+        gridOfPaper.removeIf(x -> x.canAccess);
     }
 }

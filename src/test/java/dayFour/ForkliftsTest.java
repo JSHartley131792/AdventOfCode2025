@@ -188,4 +188,14 @@ public class ForkliftsTest {
         long expectedResult = 13;
         assertEquals(expectedResult, forklifts.getTotalAccess());
     }
+
+    @Test
+    public void canRemoveAccessible() {
+        forklifts.readForklifts("test", "input");
+        long expectedRemaining = 58;
+        long expectedRemoved = 13;
+        forklifts.removeAccessible();
+        assertEquals(expectedRemaining, forklifts.gridOfPaper.size());
+        assertEquals(expectedRemoved, forklifts.removedPaper);
+    }
 }
