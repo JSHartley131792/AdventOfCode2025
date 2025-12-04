@@ -34,6 +34,10 @@ public class Forklifts {
         return this.grid;
     }
 
+    public Position getPositionByAxis(int desiredX, int desiredY) {
+        return this.grid.stream().filter(x -> x.xAxis == desiredX && x.yAxis == desiredY).toList().get(0);
+    }
+
     public Forklifts() {
     };
 

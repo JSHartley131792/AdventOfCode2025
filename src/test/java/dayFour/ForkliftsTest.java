@@ -88,4 +88,17 @@ public class ForkliftsTest {
         assertEquals(forklifts.grid.get(3).getY(), expectedTwoTwoPosition.getY());
         assertEquals(forklifts.grid.get(3).getValue(), expectedTwoTwoPosition.getValue());
     }
+
+    @Test
+    void canGetFromSpecificPosition() {
+        List<String> strings = new ArrayList<>();
+        strings.add(".@");
+        strings.add("@.");
+        Position expectedPosition = forklifts.new Position(2, 2, false);
+        forklifts.applyGrid(strings);
+        Position resultPosition = forklifts.getPositionByAxis(2, 2);
+        assertEquals(resultPosition.getX(), expectedPosition.getX());
+        assertEquals(resultPosition.getY(), expectedPosition.getY());
+        assertEquals(resultPosition.getValue(), expectedPosition.getValue());
+    }
 }
