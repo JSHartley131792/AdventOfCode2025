@@ -92,7 +92,7 @@ public class Forklifts {
                 if (isPaper) gridOfPaper.add(position);
             }
         }
-        for (Position position : grid) {
+        for (Position position : gridOfPaper) {
             findNearbyPaper(position.xAxis, position.yAxis);
             position.setCanAccess();
         }
@@ -107,7 +107,7 @@ public class Forklifts {
                 if (Math.abs(xAxis - xSearch) < 2 && Math.abs(yAxis - ySearch) < 2) {
                     if (xSearch == xAxis && yAxis == ySearch) {
                         continue;
-                    } else if(xSearch < 0 || xSearch > maxX || ySearch < 0 || ySearch > maxY) {
+                    } else if (xSearch < 0 || xSearch > maxX || ySearch < 0 || ySearch > maxY) {
                         continue;
                     } else {
                         if (getPositionByAxis(xSearch, ySearch).getValue()) {
