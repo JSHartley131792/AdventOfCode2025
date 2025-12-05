@@ -9,6 +9,14 @@ public class Ingredients {
             this.lowerRange = lower;
             this.upperRange = upper;
         }
+
+        public long getLower() {
+            return this.lowerRange;
+        }
+        
+        public long getUpper() {
+            return this.upperRange;
+        }
     }
 
     public Ingredients() {
@@ -17,5 +25,9 @@ public class Ingredients {
 
     public boolean isInRange(long i, Range range) {
         return i > range.lowerRange && i < range.upperRange;
+    }
+
+    public Range parseRange(String input) {
+        return new Range(1, 2);
     }
 }

@@ -29,4 +29,12 @@ public class IngredientsTest {
         boolean expectedResponse = true;
         assertEquals(expectedResponse, ingredients.isInRange(2, range));
     }
+
+    @Test
+    public void canInterpolateStringToRange() {
+        String input = "1-2";
+        Range expectedRange = ingredients.new Range(1,2);
+        assertEquals(expectedRange.getLower(), ingredients.parseRange(input).getLower());
+        assertEquals(expectedRange.getUpper(), ingredients.parseRange(input).getUpper());
+    }
 }
