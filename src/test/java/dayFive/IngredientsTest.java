@@ -45,4 +45,24 @@ public class IngredientsTest {
         assertEquals(expectedRange.getLower(), ingredients.parseRange(input).getLower());
         assertEquals(expectedRange.getUpper(), ingredients.parseRange(input).getUpper());
     }
+
+    @Test
+    public void canSeeIfIngredientIsSpoiled() {
+        Range rangeOne = ingredients.new Range(1,3);
+        Range rangeTwo = ingredients.new Range(5,7);
+        ingredients.ranges.add(rangeOne);
+        ingredients.ranges.add(rangeTwo);
+        boolean expectedResponse = false;
+        assertEquals(expectedResponse, ingredients.isFresh(4));
+    }
+    
+    @Test
+    public void canSeeIfIngredientIsFresh() {
+        Range rangeOne = ingredients.new Range(1,3);
+        Range rangeTwo = ingredients.new Range(5,7);
+        ingredients.ranges.add(rangeOne);
+        ingredients.ranges.add(rangeTwo);
+        boolean expectedResponse = true;
+        assertEquals(expectedResponse, ingredients.isFresh(3));
+    }
 }

@@ -1,7 +1,10 @@
 package adventofcode.dayFive;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Ingredients {
-    public class Range{
+    public class Range {
         long lowerRange;
         long upperRange;
 
@@ -13,18 +16,19 @@ public class Ingredients {
         public long getLower() {
             return this.lowerRange;
         }
-        
+
         public long getUpper() {
             return this.upperRange;
         }
     }
 
     public Ingredients() {
-
     }
 
+    public List<Range> ranges = new ArrayList<>();
+
     public boolean isInRange(long i, Range range) {
-        return i > range.lowerRange && i < range.upperRange;
+        return i >= range.lowerRange && i <= range.upperRange;
     }
 
     public Range parseRange(String input) {
@@ -32,5 +36,16 @@ public class Ingredients {
         long lower = Long.parseLong(bounds[0]);
         long upper = Long.parseLong(bounds[1]);
         return new Range(lower, upper);
+    }
+
+    public boolean isFresh(int i) {
+        for (Range range : ranges) {
+            if (isInRange(i, range)) {
+                return true;
+            } else {
+                continue;
+            }
+        }
+        return false;
     }
 }
