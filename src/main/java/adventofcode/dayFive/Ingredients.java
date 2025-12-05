@@ -1,7 +1,10 @@
 package adventofcode.dayFive;
 
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
 
 public class Ingredients {
     public class Range {
@@ -60,5 +63,29 @@ public class Ingredients {
                 continue;
             }
         }
+    }
+
+    public boolean isRangeString(String string) {
+        return string.matches("[0-9]+-[0-9]+");
+    }
+
+     public void readIngredients(String env, String fileName) {
+        File ingredientsFile = new File("src/" + env + "/resources/dayFive/" + fileName + ".txt");
+        try (Scanner myReader = new Scanner(ingredientsFile)) {
+            while (myReader.hasNextLine()) {
+                String data = myReader.nextLine();
+                if (isRangeString(data)) {
+                    ranges.add(parseRange(data));
+                } else if (data.equals("")) {
+                    continue;
+                } else {
+                    ingredients.add(Long.valueOf(data));
+                }
+            }
+        } catch (FileNotFoundException e) {
+            System.out.println("An error occurred.");
+            e.printStackTrace();
+        }
+        checkIngredients();
     }
 }

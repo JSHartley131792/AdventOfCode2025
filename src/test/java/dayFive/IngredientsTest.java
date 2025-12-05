@@ -92,4 +92,23 @@ public class IngredientsTest {
         ingredients.checkIngredients();
         assertEquals(expectedResponse, ingredients.freshIngredientCount);
     }
+
+    @Test
+    public void canMatchRangeString() {
+        boolean expected = true;
+        assertEquals(expected, ingredients.isRangeString("123-456"));
+    }
+    
+    @Test
+    public void canMatchRangeStringWhenNot() {
+        boolean expected = false;
+        assertEquals(expected, ingredients.isRangeString("123"));
+    }
+
+    @Test
+    public void canReadFileIn() {
+        ingredients.readIngredients("test", "input");
+        long expectedResult = 3;
+        assertEquals(expectedResult, ingredients.freshIngredientCount);
+    }
 }
