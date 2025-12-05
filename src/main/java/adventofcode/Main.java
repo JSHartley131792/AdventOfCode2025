@@ -2,6 +2,7 @@ package adventofcode;
 
 import java.math.BigInteger;
 
+import adventofcode.dayFive.Ingredients;
 import adventofcode.dayFour.Forklifts;
 import adventofcode.dayOne.Rotations;
 import adventofcode.dayThree.Joltage;
@@ -12,7 +13,8 @@ public class Main {
         // dayOne();
         // dayTwo();
         // dayThree();
-        dayFour();
+        // dayFour();
+        dayFive();
     }
 
     public static void dayOne() {
@@ -48,5 +50,12 @@ public class Main {
         System.out.println(forklifts.getTotalAccess());
         System.out.println("The total removed ended up at: ");
         System.out.println(forklifts.removedPaper);
+    }
+    
+    public static void dayFive() {
+        Ingredients ingredients = new Ingredients();
+        ingredients.readIngredients("main", "input");
+        System.out.println("The total of fresh ingredients ended up at: ");
+        System.out.println(ingredients.freshIngredientCount);
     }
 }
