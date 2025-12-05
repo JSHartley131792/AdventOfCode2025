@@ -29,6 +29,11 @@ public class Ingredients {
         public boolean isInRange(long i) {
             return i >= lowerRange && i <= upperRange;
         }
+
+        public boolean isOverlap(Range r) {
+            return (r.lowerRange >= lowerRange && r.lowerRange <= upperRange)
+                    || (r.upperRange >= lowerRange && r.upperRange <= upperRange);
+        }
     }
 
     public Ingredients() {
@@ -68,7 +73,7 @@ public class Ingredients {
             }
         }
     }
-    
+
     public void checkMaxFreshIngredients() {
         for (Range range : ranges) {
             for (long i = range.lowerRange; i <= range.upperRange; i++) {
@@ -82,7 +87,7 @@ public class Ingredients {
         return string.matches("[0-9]+-[0-9]+");
     }
 
-     public void readIngredients(String env, String fileName) {
+    public void readIngredients(String env, String fileName) {
         File ingredientsFile = new File("src/" + env + "/resources/dayFive/" + fileName + ".txt");
         try (Scanner myReader = new Scanner(ingredientsFile)) {
             while (myReader.hasNextLine()) {

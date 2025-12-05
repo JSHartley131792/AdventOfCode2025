@@ -148,4 +148,12 @@ public class IngredientsTest {
         long expectedResult = 14;
         assertEquals(expectedResult, ingredients.maxFreshUniqueIngredientCount);
     }
+    
+    @Test
+    public void canSeeIfRangesOverLap() {
+        Range rangeOne = ingredients.new Range(1,3);
+        Range rangeTwo = ingredients.new Range(3,5);
+        boolean expectedResult = true;
+        assertEquals(expectedResult, rangeOne.isOverlap(rangeTwo));
+    }
 }
