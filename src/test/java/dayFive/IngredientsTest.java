@@ -65,4 +65,16 @@ public class IngredientsTest {
         boolean expectedResponse = true;
         assertEquals(expectedResponse, ingredients.isFresh(3));
     }
+    
+    @Test
+    public void canCheckAddedIngredients() {
+        Range rangeOne = ingredients.new Range(1,3);
+        Range rangeTwo = ingredients.new Range(5,7);
+        ingredients.ranges.add(rangeOne);
+        ingredients.ranges.add(rangeTwo);
+        ingredients.ingredients.add(4L);
+        long expectedResponse = 0;
+        ingredients.checkIngredients();
+        assertEquals(expectedResponse, ingredients.freshIngredientCount);
+    }
 }

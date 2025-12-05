@@ -27,6 +27,9 @@ public class Ingredients {
 
     public List<Range> ranges = new ArrayList<>();
 
+    public List<Long> ingredients = new ArrayList<>();
+    public long freshIngredientCount = 0;
+
     public boolean isInRange(long i, Range range) {
         return i >= range.lowerRange && i <= range.upperRange;
     }
@@ -47,5 +50,9 @@ public class Ingredients {
             }
         }
         return false;
+    }
+
+    public void checkIngredients() {
+        freshIngredientCount = 0;
     }
 }
