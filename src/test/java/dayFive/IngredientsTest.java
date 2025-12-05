@@ -37,4 +37,12 @@ public class IngredientsTest {
         assertEquals(expectedRange.getLower(), ingredients.parseRange(input).getLower());
         assertEquals(expectedRange.getUpper(), ingredients.parseRange(input).getUpper());
     }
+    
+    @Test
+    public void canInterpolateStringToRangeLarger() {
+        String input = "1-10";
+        Range expectedRange = ingredients.new Range(1,10);
+        assertEquals(expectedRange.getLower(), ingredients.parseRange(input).getLower());
+        assertEquals(expectedRange.getUpper(), ingredients.parseRange(input).getUpper());
+    }
 }

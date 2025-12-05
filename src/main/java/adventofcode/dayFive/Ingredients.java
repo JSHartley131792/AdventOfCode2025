@@ -28,6 +28,9 @@ public class Ingredients {
     }
 
     public Range parseRange(String input) {
-        return new Range(1, 2);
+        String[] bounds = input.split("-");
+        long lower = Long.parseLong(bounds[0]);
+        long upper = Long.parseLong(bounds[1]);
+        return new Range(lower, upper);
     }
 }
