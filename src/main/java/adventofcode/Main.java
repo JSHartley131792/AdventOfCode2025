@@ -57,5 +57,7 @@ public class Main {
         ingredients.readIngredients("main", "input");
         System.out.println("The total of fresh ingredients ended up at: ");
         System.out.println(ingredients.freshIngredientCount);
+        System.out.println("The max of fresh unique ingredients ended up at: ");
+        System.out.println(ingredients.maxFreshUniqueIngredientCount);
     }
 }
