@@ -41,7 +41,7 @@ public class Ingredients {
         return new Range(lower, upper);
     }
 
-    public boolean isFresh(int i) {
+    public boolean isFresh(long i) {
         for (Range range : ranges) {
             if (isInRange(i, range)) {
                 return true;
@@ -53,6 +53,12 @@ public class Ingredients {
     }
 
     public void checkIngredients() {
-        freshIngredientCount = 0;
+        for (Long ingredient : ingredients) {
+            if (isFresh(ingredient)) {
+                freshIngredientCount++;
+            } else {
+                continue;
+            }
+        }
     }
 }

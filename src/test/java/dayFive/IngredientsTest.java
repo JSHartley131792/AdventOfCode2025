@@ -77,4 +77,19 @@ public class IngredientsTest {
         ingredients.checkIngredients();
         assertEquals(expectedResponse, ingredients.freshIngredientCount);
     }
+    
+    @Test
+    public void canCheckMultipleIngredients() {
+        Range rangeOne = ingredients.new Range(1,3);
+        Range rangeTwo = ingredients.new Range(5,7);
+        ingredients.ranges.add(rangeOne);
+        ingredients.ranges.add(rangeTwo);
+        ingredients.ingredients.add(2L);
+        ingredients.ingredients.add(3L);
+        ingredients.ingredients.add(4L);
+        ingredients.ingredients.add(5L);
+        long expectedResponse = 3;
+        ingredients.checkIngredients();
+        assertEquals(expectedResponse, ingredients.freshIngredientCount);
+    }
 }
