@@ -107,4 +107,25 @@ public class Ingredients {
         checkIngredients();
         checkMaxFreshIngredients();
     }
+
+    public List<Range> reduce(List<Range> ranges) {
+        List<Range> reduced = new ArrayList<>();
+        reduced.add(ranges.remove(0));
+        for (Range range : ranges) {
+            boolean merged = false;
+            for (int i = 0; i < reduced.size(); i++) {
+                Range comparing = ranges.get(i);
+                if(comparing.isOverlap(range)) {
+                    Range newRange = new Range(comparing.getLower(), Math.max(comparing.upperRange, range.upperRange));
+                    reduced.set(i, newRange);
+                    merged = true;
+                    break;
+                }
+            }
+            if (!merged) {
+                reduced.add(range);
+            }
+        }
+        return reduced;
+    }
 }

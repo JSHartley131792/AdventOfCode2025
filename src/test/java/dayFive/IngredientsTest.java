@@ -2,6 +2,9 @@ package dayFive;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -155,5 +158,33 @@ public class IngredientsTest {
         Range rangeTwo = ingredients.new Range(3,5);
         boolean expectedResult = true;
         assertEquals(expectedResult, rangeOne.isOverlap(rangeTwo));
+    }
+    
+    @Test
+    public void canReduceOverlappingRanges() {
+        Range rangeOne = ingredients.new Range(1,3);
+        Range rangeTwo = ingredients.new Range(3,5);
+        List<Range> ranges = new ArrayList<>();
+        ranges.add(rangeOne);
+        ranges.add(rangeTwo);
+        long expectedSize = 1;
+        assertEquals(expectedSize, ingredients.reduce(ranges).size());
+    }
+    
+    @Test
+    public void canReduceMixOfOverlappingRanges() {
+        Range rangeOne = ingredients.new Range(1,3);
+        Range rangeTwo = ingredients.new Range(3,5);
+        Range rangeThree = ingredients.new Range(6,7);
+        Range rangeFour = ingredients.new Range(12,15);
+        Range rangeFive = ingredients.new Range(13,19);
+        List<Range> ranges = new ArrayList<>();
+        ranges.add(rangeOne);
+        ranges.add(rangeTwo);
+        ranges.add(rangeThree);
+        ranges.add(rangeFour);
+        ranges.add(rangeFive);
+        long expectedSize = 3;
+        assertEquals(expectedSize, ingredients.reduce(ranges).size());
     }
 }
