@@ -32,6 +32,7 @@ public class Ingredients {
 
     public List<Long> ingredients = new ArrayList<>();
     public long freshIngredientCount = 0;
+    public long maxFreshUniqueIngredientCount = 0;
 
     public boolean isInRange(long i, Range range) {
         return i >= range.lowerRange && i <= range.upperRange;
@@ -64,6 +65,12 @@ public class Ingredients {
             }
         }
     }
+    
+    public void checkMaxFreshIngredients() {
+        for (Range range : ranges) {
+            maxFreshUniqueIngredientCount += range.upperRange - range.lowerRange + 1;
+        }
+    }
 
     public boolean isRangeString(String string) {
         return string.matches("[0-9]+-[0-9]+");
@@ -87,5 +94,6 @@ public class Ingredients {
             e.printStackTrace();
         }
         checkIngredients();
+        checkMaxFreshIngredients();
     }
 }
