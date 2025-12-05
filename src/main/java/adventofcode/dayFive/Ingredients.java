@@ -3,13 +3,14 @@ package adventofcode.dayFive;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Scanner;
 import java.util.Set;
 
 public class Ingredients {
-    public class Range {
+    public class Range implements Comparable<Range> {
         long lowerRange;
         long upperRange;
 
@@ -26,6 +27,10 @@ public class Ingredients {
             return this.upperRange;
         }
 
+        public long length() {
+            return upperRange - lowerRange + 1L;
+        }
+
         public boolean isInRange(long i) {
             return i >= lowerRange && i <= upperRange;
         }
@@ -33,6 +38,14 @@ public class Ingredients {
         public boolean isOverlap(Range r) {
             return (r.lowerRange >= lowerRange && r.lowerRange <= upperRange)
                     || (r.upperRange >= lowerRange && r.upperRange <= upperRange);
+        }
+
+        @Override
+        public int compareTo(Range r) {
+            if (lowerRange == r.lowerRange) {
+                return Long.compare(upperRange, r.upperRange);
+            }
+            return lowerRange < r.lowerRange ? -1 : 1;
         }
     }
 
@@ -75,12 +88,10 @@ public class Ingredients {
     }
 
     public void checkMaxFreshIngredients() {
-        for (Range range : ranges) {
-            for (long i = range.lowerRange; i <= range.upperRange; i++) {
-                possibleFreshIngredients.add(i);
-            }
+        List<Range> reduced = reduce(ranges);
+        for (Range range : reduced) {
+            maxFreshUniqueIngredientCount += range.length();
         }
-        maxFreshUniqueIngredientCount = possibleFreshIngredients.size();
     }
 
     public boolean isRangeString(String string) {
@@ -109,13 +120,14 @@ public class Ingredients {
     }
 
     public List<Range> reduce(List<Range> ranges) {
+        Collections.sort(ranges);
         List<Range> reduced = new ArrayList<>();
         reduced.add(ranges.remove(0));
         for (Range range : ranges) {
             boolean merged = false;
             for (int i = 0; i < reduced.size(); i++) {
-                Range comparing = ranges.get(i);
-                if(comparing.isOverlap(range)) {
+                Range comparing = reduced.get(i);
+                if (comparing.isOverlap(range)) {
                     Range newRange = new Range(comparing.getLower(), Math.max(comparing.upperRange, range.upperRange));
                     reduced.set(i, newRange);
                     merged = true;
