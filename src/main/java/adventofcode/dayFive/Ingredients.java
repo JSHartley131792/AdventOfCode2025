@@ -3,8 +3,10 @@ package adventofcode.dayFive;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Scanner;
+import java.util.Set;
 
 public class Ingredients {
     public class Range {
@@ -33,6 +35,7 @@ public class Ingredients {
     public List<Long> ingredients = new ArrayList<>();
     public long freshIngredientCount = 0;
     public long maxFreshUniqueIngredientCount = 0;
+    public Set<Long> possibleFreshIngredients = new HashSet<>();
 
     public boolean isInRange(long i, Range range) {
         return i >= range.lowerRange && i <= range.upperRange;
@@ -68,8 +71,11 @@ public class Ingredients {
     
     public void checkMaxFreshIngredients() {
         for (Range range : ranges) {
-            maxFreshUniqueIngredientCount += range.upperRange - range.lowerRange + 1;
+            for (long i = range.lowerRange; i <= range.upperRange; i++) {
+                possibleFreshIngredients.add(i);
+            }
         }
+        maxFreshUniqueIngredientCount = possibleFreshIngredients.size();
     }
 
     public boolean isRangeString(String string) {

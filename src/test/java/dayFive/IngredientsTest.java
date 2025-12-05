@@ -126,4 +126,26 @@ public class IngredientsTest {
         ingredients.checkMaxFreshIngredients();
         assertEquals(expectedResponse, ingredients.maxFreshUniqueIngredientCount);
     }
+    
+    @Test
+    public void canAssessMaxFreshUniqueIngredients() {
+        Range rangeOne = ingredients.new Range(1,3);
+        Range rangeTwo = ingredients.new Range(3,5);
+        ingredients.ranges.add(rangeOne);
+        ingredients.ranges.add(rangeTwo);
+        ingredients.ingredients.add(2L);
+        ingredients.ingredients.add(3L);
+        ingredients.ingredients.add(4L);
+        ingredients.ingredients.add(5L);
+        long expectedResponse = 5;
+        ingredients.checkMaxFreshIngredients();
+        assertEquals(expectedResponse, ingredients.maxFreshUniqueIngredientCount);
+    }
+    
+    @Test
+    public void canAssessMaxIngredientsInExample() {
+        ingredients.readIngredients("test", "input");
+        long expectedResult = 14;
+        assertEquals(expectedResult, ingredients.maxFreshUniqueIngredientCount);
+    }
 }
