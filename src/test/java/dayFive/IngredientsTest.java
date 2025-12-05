@@ -20,14 +20,14 @@ public class IngredientsTest {
     public void canSeeIfIngredientIsNotInRange() {
         Range range = ingredients.new Range(1,2);
         boolean expectedResponse = false;
-        assertEquals(expectedResponse, ingredients.isInRange(3, range));
+        assertEquals(expectedResponse, range.isInRange(3));
     }
     
     @Test
     public void canSeeIfIngredientInRange() {
         Range range = ingredients.new Range(1,3);
         boolean expectedResponse = true;
-        assertEquals(expectedResponse, ingredients.isInRange(2, range));
+        assertEquals(expectedResponse, range.isInRange(2));
     }
 
     @Test

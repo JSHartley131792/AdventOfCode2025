@@ -25,6 +25,10 @@ public class Ingredients {
         public long getUpper() {
             return this.upperRange;
         }
+
+        public boolean isInRange(long i) {
+            return i >= lowerRange && i <= upperRange;
+        }
     }
 
     public Ingredients() {
@@ -37,10 +41,6 @@ public class Ingredients {
     public long maxFreshUniqueIngredientCount = 0;
     public Set<Long> possibleFreshIngredients = new HashSet<>();
 
-    public boolean isInRange(long i, Range range) {
-        return i >= range.lowerRange && i <= range.upperRange;
-    }
-
     public Range parseRange(String input) {
         String[] bounds = input.split("-");
         long lower = Long.parseLong(bounds[0]);
@@ -50,7 +50,7 @@ public class Ingredients {
 
     public boolean isFresh(long i) {
         for (Range range : ranges) {
-            if (isInRange(i, range)) {
+            if (range.isInRange(i)) {
                 return true;
             } else {
                 continue;
