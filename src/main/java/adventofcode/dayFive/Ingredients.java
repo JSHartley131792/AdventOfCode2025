@@ -15,7 +15,7 @@ public class Ingredients {
 
     }
 
-    public boolean isInRange(int i, Range range) {
-        return false;
+    public boolean isInRange(long i, Range range) {
+        return i > range.lowerRange && i < range.upperRange;
     }
 }

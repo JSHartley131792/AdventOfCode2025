@@ -17,9 +17,16 @@ public class IngredientsTest {
     }
 
     @Test
-    public void canSeeIfIngredientInRange() {
+    public void canSeeIfIngredientIsNotInRange() {
         Range range = ingredients.new Range(1,2);
         boolean expectedResponse = false;
         assertEquals(expectedResponse, ingredients.isInRange(3, range));
+    }
+    
+    @Test
+    public void canSeeIfIngredientInRange() {
+        Range range = ingredients.new Range(1,3);
+        boolean expectedResponse = true;
+        assertEquals(expectedResponse, ingredients.isInRange(2, range));
     }
 }
