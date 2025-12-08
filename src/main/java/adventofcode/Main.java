@@ -5,6 +5,7 @@ import java.math.BigInteger;
 import adventofcode.dayFive.Ingredients;
 import adventofcode.dayFour.Forklifts;
 import adventofcode.dayOne.Rotations;
+import adventofcode.daySix.Cephalopod;
 import adventofcode.dayThree.Joltage;
 import adventofcode.dayTwo.Search;
 
@@ -14,7 +15,8 @@ public class Main {
         // dayTwo();
         // dayThree();
         // dayFour();
-        dayFive();
+        // dayFive();
+        daySix();
     }
 
     public static void dayOne() {
@@ -59,5 +61,17 @@ public class Main {
         System.out.println(ingredients.freshIngredientCount);
         System.out.println("The max of fresh unique ingredients ended up at: ");
         System.out.println(ingredients.maxFreshUniqueIngredientCount);
+    }
+    
+    public static void daySix() {
+        Cephalopod cephalopod = new Cephalopod();
+        System.out.println("The total for partOne ended up at: ");
+        System.out.println(cephalopod.solveForPartOne(
+            cephalopod.readInput("main", "input")
+        ));
+        System.out.println("The total for part two ended up at: ");
+        System.out.println(cephalopod.solveForPartTwo(
+            cephalopod.readInput("main", "input")
+        ));
     }
 }
