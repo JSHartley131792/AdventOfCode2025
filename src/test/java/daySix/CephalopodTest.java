@@ -20,4 +20,10 @@ public class CephalopodTest {
         String[] expectedArray = {"1", "2"};
         assertArrayEquals(expectedArray, cephalopod.parseNumbers("1 2"));
     }
+    
+    @Test
+    public void canParseStringOfNumbersWithRandomSpaces() {
+        String[] expectedArray = {"1", "2"};
+        assertArrayEquals(expectedArray, cephalopod.parseNumbers("1   2"));
+    }
 }
