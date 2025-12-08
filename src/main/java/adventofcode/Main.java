@@ -69,5 +69,9 @@ public class Main {
         System.out.println(cephalopod.solveForPartOne(
             cephalopod.readInput("main", "input")
         ));
+        System.out.println("The total for part two ended up at: ");
+        System.out.println(cephalopod.solveForPartTwo(
+            cephalopod.readInput("main", "input")
+        ));
     }
 }
