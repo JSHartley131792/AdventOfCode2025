@@ -3,6 +3,8 @@ package adventofcode.daySix;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Scanner;
 
@@ -37,6 +39,26 @@ public class Cephalopod {
             sum += line;
         }
         return sum;
+    }
+
+    // Cephalopod math is written right-to-left in columns
+
+    public String[] switchWithinColumns(String[] numbers) {
+        List<String> numberList = Arrays.asList(numbers);
+        int maxLength = numberList.stream().max(Comparator.comparingInt(String::length)).get().length();
+        String[] columns = new String[maxLength];
+        for (int i = 0; i < numbers.length; i++) {
+            for (int j = numbers[i].length() - 1; j >=0; j--) {
+                int reversedNumber = numbers[i].length() - 1 - j;
+                if(columns[reversedNumber] == null) {
+                    columns[reversedNumber] = String.valueOf(numbers[i].charAt(j));
+                } else {
+                    columns[reversedNumber] += numbers[i].charAt(j);
+                }
+                reversedNumber++;
+            }
+        }
+        return columns;
     }
 
     public List<String> readInput(String folderPath, String fileName) {

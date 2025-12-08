@@ -68,4 +68,13 @@ public class CephalopodTest {
         long expectedResult = 4277556;
         assertEquals(expectedResult, cephalopod.solveForPartOne(partOneExample));
     }
+
+    // Cephalopod math is written right-to-left in columns
+
+    @Test
+    public void canSwitchNumbersWithinColumns() {
+        String[] numbers = {"12", "3"};
+        String[] expecedResult = {"23", "1"};
+        assertArrayEquals(expecedResult, cephalopod.switchWithinColumns(numbers));
+    }
 }
