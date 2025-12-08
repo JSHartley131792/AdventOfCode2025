@@ -77,4 +77,11 @@ public class CephalopodTest {
         String[] expecedResult = {"23", "1"};
         assertArrayEquals(expecedResult, cephalopod.switchWithinColumns(numbers));
     }
+    
+    @Test
+    public void canSwitchRowsToColumns() {
+        String[][] numbers = {{"12", "34"}, {"56", "78"}, {"91", "23"}};
+        String[][] expecedResult = {{"12", "56", "91"}, {"34", "78", "23"}};
+        assertArrayEquals(expecedResult, cephalopod.switchRowsToColumns(numbers));
+    }
 }

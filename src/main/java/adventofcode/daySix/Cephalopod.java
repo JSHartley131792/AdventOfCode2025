@@ -60,6 +60,16 @@ public class Cephalopod {
         }
         return columns;
     }
+    
+    public String[][] switchRowsToColumns(String[][] numbers) {
+        String[][] columns = new String[numbers[0].length][numbers.length];
+        for (int i = 0; i < numbers.length; i++) {
+            for (int j = 0; j < numbers[0].length; j++) {
+                columns[j][i] = numbers[i][j];
+            }
+        }
+        return columns;
+    }
 
     public List<String> readInput(String folderPath, String fileName) {
         List<String> homework = new ArrayList<>();
