@@ -33,12 +33,21 @@ public class CephalopodTest {
 
     @Test
     public void canProduceEmptySumFromLists() {
-        List<String[]> input = new ArrayList<>();
-        String[] zeroArray = {"0"};
-        String[] plusArray = {"+"};
-        input.add(zeroArray);
-        input.add(plusArray);
+        List<String> input = new ArrayList<>();
+        input.add("0");
+        input.add("+");
         long expectedResult = 0L;
-        assertEquals(expectedResult, cephalopod.solve());
+        assertEquals(expectedResult, cephalopod.solve(input));
+    }
+    
+    @Test
+    public void canProduceSumFromLists() {
+        List<String> input = new ArrayList<>();
+        input.add("1");
+        input.add("2");
+        input.add("3");
+        input.add("+");
+        long expectedResult = 6L;
+        assertEquals(expectedResult, cephalopod.solve(input));
     }
 }
