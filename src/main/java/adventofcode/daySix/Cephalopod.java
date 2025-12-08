@@ -43,32 +43,40 @@ public class Cephalopod {
 
     // Cephalopod math is written right-to-left in columns
 
-    public String[] switchWithinColumns(String[] numbers) {
-        List<String> numberList = Arrays.asList(numbers);
-        int maxLength = numberList.stream().max(Comparator.comparingInt(String::length)).get().length();
-        String[] columns = new String[maxLength];
-        for (int i = 0; i < numbers.length; i++) {
-            for (int j = numbers[i].length() - 1; j >=0; j--) {
-                int reversedNumber = numbers[i].length() - 1 - j;
-                if(columns[reversedNumber] == null) {
-                    columns[reversedNumber] = String.valueOf(numbers[i].charAt(j));
-                } else {
-                    columns[reversedNumber] += numbers[i].charAt(j);
+    public Long solveForPartTwo(List<String> input) {
+        long sum = 0L;
+        List<Integer> operationIndexes = new ArrayList<>();
+        for (int i = 0; i < input.get(input.size() - 1).length(); i++) {
+            if(input.get(input.size()-1).charAt(i) != ' ') {
+                operationIndexes.add(i);
+            }
+        }
+        operationIndexes.add(input.get(0).length()+1);
+        for (int i = 0; i < operationIndexes.size() - 1; i++) {
+            int currentStringPos = operationIndexes.get(i);
+            int endingStringPos = operationIndexes.get(i + 1) - 1;
+            char operation = input.get(input.size() - 1).charAt(currentStringPos);
+            long lineValue;
+            if (operation == '+') {
+                lineValue = 0;
+            } else {
+                lineValue = 1;
+            }
+            for (int j = currentStringPos; j < endingStringPos; j++) {
+                String numberString = "";
+                for (int k = 0; k < input.size()-1; k++) {
+                    numberString += input.get(k).charAt(j);
                 }
-                reversedNumber++;
+                long value = Integer.valueOf(numberString.toString().trim());
+                if (operation == '+') {
+                    lineValue += value;
+                } else {
+                    lineValue *= value;
+                }
             }
+            sum += lineValue;
         }
-        return columns;
-    }
-    
-    public String[][] switchRowsToColumns(String[][] numbers) {
-        String[][] columns = new String[numbers[0].length][numbers.length];
-        for (int i = 0; i < numbers.length; i++) {
-            for (int j = 0; j < numbers[0].length; j++) {
-                columns[j][i] = numbers[i][j];
-            }
-        }
-        return columns;
+        return sum;
     }
 
     public List<String> readInput(String folderPath, String fileName) {
