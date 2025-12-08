@@ -50,4 +50,15 @@ public class CephalopodTest {
         long expectedResult = 6L;
         assertEquals(expectedResult, cephalopod.solve(input));
     }
+    
+    @Test
+    public void canProduceMultiplicationFromLists() {
+        List<String> input = new ArrayList<>();
+        input.add("1");
+        input.add("2");
+        input.add("4");
+        input.add("*");
+        long expectedResult = 8L;
+        assertEquals(expectedResult, cephalopod.solve(input));
+    }
 }
