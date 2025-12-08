@@ -37,7 +37,7 @@ public class CephalopodTest {
         input.add("0");
         input.add("+");
         long expectedResult = 0L;
-        assertEquals(expectedResult, cephalopod.solve(input));
+        assertEquals(expectedResult, cephalopod.solveForPartOne(input));
     }
     
     @Test
@@ -48,7 +48,7 @@ public class CephalopodTest {
         input.add("3");
         input.add("+");
         long expectedResult = 6L;
-        assertEquals(expectedResult, cephalopod.solve(input));
+        assertEquals(expectedResult, cephalopod.solveForPartOne(input));
     }
     
     @Test
@@ -59,6 +59,13 @@ public class CephalopodTest {
         input.add("4");
         input.add("*");
         long expectedResult = 8L;
-        assertEquals(expectedResult, cephalopod.solve(input));
+        assertEquals(expectedResult, cephalopod.solveForPartOne(input));
+    }
+    
+    @Test
+    public void canSolveForPartOneExample() {
+        List<String> partOneExample = cephalopod.readInput("test", "input");
+        long expectedResult = 4277556;
+        assertEquals(expectedResult, cephalopod.solveForPartOne(partOneExample));
     }
 }
