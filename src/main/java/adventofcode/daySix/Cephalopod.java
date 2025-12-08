@@ -5,8 +5,12 @@ public class Cephalopod {
 
     }
 
-    public String[] parseNumbers(String string) {
+    public String[] parseLine(String string) {
         return string.split("\\s+");
+    }
+
+    public Long solve() {
+        return 0l;
     }
     
 }
