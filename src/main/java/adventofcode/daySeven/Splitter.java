@@ -9,13 +9,14 @@ public class Splitter {
     public Splitter() {
     }
 
-    public Integer findStartingIndex(String input) {
+    public List<Integer> findStartingIndex(String input) {
+        List<Integer> startingIndex = new ArrayList<>();
         for (int i = 0; i < input.length(); i++) {
             if (input.charAt(i) == 'S') {
-                return i;
+                startingIndex.add(i);
             }
         }
-        return 0;
+        return startingIndex;
     }
 
     public List<Integer> findSplit(String nextLine, List<Integer> currentIndex) {

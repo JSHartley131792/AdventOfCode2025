@@ -21,7 +21,8 @@ public class SplitterTest {
     @Test
     public void canRecogniseBeamStart() {
         String input = "..S..";
-        int expectedResponse = 2;
+        List<Integer> expectedResponse = new ArrayList<>();
+        expectedResponse.add(2);
         assertEquals(expectedResponse, splitter.findStartingIndex(input));
     }
 
