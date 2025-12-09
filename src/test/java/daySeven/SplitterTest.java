@@ -23,57 +23,59 @@ public class SplitterTest {
         String input = "..S..";
         List<Integer> expectedResponse = new ArrayList<>();
         expectedResponse.add(2);
-        assertEquals(expectedResponse, splitter.findStartingIndex(input));
+        splitter.findStartingIndex(input);
+        assertEquals(expectedResponse, splitter.currentIndices);
     }
 
     @Test
     public void canRecogniseEmptySplitAndUpdateIndex() {
-        List<Integer> currentIndex = new ArrayList<>();
-        currentIndex.add(2);
+        splitter.findStartingIndex("..S..");
+        List<Integer> startingIndex = new ArrayList<>();
+        startingIndex.add(2);
         String nextLine = ".....";
-        List<Integer> result = splitter.findSplit(nextLine, currentIndex);
-        assertEquals(currentIndex.get(0), result.get(0));
-        assertEquals(currentIndex.size(), result.size());
+        splitter.findSplit(nextLine);
+        List<Integer> result = splitter.currentIndices;
+        assertEquals(startingIndex.get(0), result.get(0));
+        assertEquals(startingIndex.size(), result.size());
     }
-    
+
     @Test
     public void canRecogniseSplitAndUpdateIndex() {
-        List<Integer> currentIndex = new ArrayList<>();
-        currentIndex.add(2);
+        splitter.findStartingIndex("..S..");
         String nextLine = "..^..";
         List<Integer> expectedIndex = new ArrayList<>();
         expectedIndex.add(1);
         expectedIndex.add(3);
-        List<Integer> result = splitter.findSplit(nextLine, currentIndex);
+        splitter.findSplit(nextLine);
+        List<Integer> result = splitter.currentIndices;
         assertEquals(expectedIndex.get(0), result.get(0));
         assertEquals(expectedIndex.get(1), result.get(1));
         assertEquals(expectedIndex.size(), result.size());
     }
-    
+
     @Test
     public void canIgnoreFalseSplitAndUpdateIndex() {
-        List<Integer> currentIndex = new ArrayList<>();
-        currentIndex.add(2);
+        splitter.findStartingIndex("..S..");
         String nextLine = ".^...";
         List<Integer> expectedIndex = new ArrayList<>();
         expectedIndex.add(2);
-        List<Integer> result = splitter.findSplit(nextLine, currentIndex);
+        splitter.findSplit(nextLine);
+        List<Integer> result = splitter.currentIndices;
         assertEquals(expectedIndex.get(0), result.get(0));
         assertEquals(expectedIndex.size(), result.size());
     }
 
     @Test
     public void canRecogniseMultipleSplitAndUpdateIndex() {
-        List<Integer> currentIndex = new ArrayList<>();
-        currentIndex.add(2);
-        currentIndex.add(5);
+        splitter.findStartingIndex("..S..S..");
         String nextLine = "..^..^..";
         List<Integer> expectedIndex = new ArrayList<>();
         expectedIndex.add(1);
         expectedIndex.add(3);
         expectedIndex.add(4);
         expectedIndex.add(6);
-        List<Integer> result = splitter.findSplit(nextLine, currentIndex);
+        splitter.findSplit(nextLine);
+        List<Integer> result = splitter.currentIndices;
         assertEquals(expectedIndex.get(0), result.get(0));
         assertEquals(expectedIndex.get(1), result.get(1));
         assertEquals(expectedIndex.get(2), result.get(2));
