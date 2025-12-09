@@ -85,5 +85,8 @@ public class Main {
         splitter.solveForPartOne(input);
         System.out.println("The total for partOne ended up at: ");
         System.out.println(splitter.splitCount);
+        splitter.solveForPartTwo(input);
+        System.out.println("The total for partTwo ended up at: ");
+        System.out.println(splitter.possibleRoutes);
     }
 }
