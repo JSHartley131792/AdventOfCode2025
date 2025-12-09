@@ -3,12 +3,14 @@ package daySeven;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import adventofcode.daySeven.Splitter;
+import adventofcode.util.FileReader;
 
 public class SplitterTest {
     Splitter splitter;
@@ -73,5 +75,13 @@ public class SplitterTest {
         splitter.findSplit(nextLine);
         Set<Integer> result = splitter.currentIndices;
         assertEquals(expectedIndex, result);
+    }
+
+    @Test
+    public void canSolveExampleForPartOne() {
+        List<String> puzzleInput = FileReader.readFileIntoList("src/test/resources/daySeven/", "input");
+        splitter.solveForPartOne(puzzleInput);
+        int expectedResult = 21;
+        assertEquals(expectedResult, splitter.splitCount);
     }
 }

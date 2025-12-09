@@ -1,6 +1,7 @@
 package adventofcode.daySeven;
 
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 public class Splitter {
@@ -27,11 +28,19 @@ public class Splitter {
             if (nextLine.charAt(index) == '^') {
                 newIndex.add(index - 1);
                 newIndex.add(index + 1);
+                splitCount++;
             }
         }
         if (newIndex.size() == 0) {
             return;
         }
         currentIndices = newIndex;
+    }
+
+    public void solveForPartOne(List<String> puzzleInput) {
+        findStartingIndex(puzzleInput.get(0));
+        for (int i = 1; i < puzzleInput.size(); i++) {
+            findSplit(puzzleInput.get(i));
+        }
     }
 }
