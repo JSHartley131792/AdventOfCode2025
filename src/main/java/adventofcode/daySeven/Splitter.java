@@ -1,5 +1,6 @@
 package adventofcode.daySeven;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Splitter {
@@ -17,7 +18,17 @@ public class Splitter {
     }
 
     public List<Integer> findSplit(String nextLine, List<Integer> currentIndex) {
-        return currentIndex;
+        List<Integer> newIndex = new ArrayList<>();
+        for (int i = 0; i < nextLine.length(); i++) {
+            if (nextLine.charAt(i) == '^') {
+                newIndex.add(i - 1);
+                newIndex.add(i + 1);
+            }
+        }
+        if (newIndex.size() == 0) {
+            return currentIndex;
+        }
+        return newIndex;
     }
 
     

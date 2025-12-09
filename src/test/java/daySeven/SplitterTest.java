@@ -34,4 +34,18 @@ public class SplitterTest {
         assertEquals(currentIndex.get(0), result.get(0));
         assertEquals(currentIndex.size(), result.size());
     }
+    
+    @Test
+    public void canRecogniseSplitAndUpdateIndex() {
+        List<Integer> currentIndex = new ArrayList<>();
+        currentIndex.add(2);
+        String nextLine = "..^..";
+        List<Integer> expectedIndex = new ArrayList<>();
+        expectedIndex.add(1);
+        expectedIndex.add(3);
+        List<Integer> result = splitter.findSplit(nextLine, currentIndex);
+        assertEquals(expectedIndex.get(0), result.get(0));
+        assertEquals(expectedIndex.get(1), result.get(1));
+        assertEquals(expectedIndex.size(), result.size());
+    }
 }
