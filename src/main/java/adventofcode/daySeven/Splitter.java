@@ -6,6 +6,7 @@ import java.util.Set;
 
 public class Splitter {
     public int splitCount = 0;
+    public int possibleRoutes = 0;
 
     public Set<Integer> currentIndices = new HashSet<>();
 
@@ -43,6 +44,58 @@ public class Splitter {
         findStartingIndex(puzzleInput.get(0));
         for (int i = 1; i < puzzleInput.size(); i++) {
             findSplit(puzzleInput.get(i));
+        }
+    }
+
+    // each time a particle reaches a splitter, it's actually time itself which
+    // splits. In one timeline, the particle went left, and in the other timeline,
+    // the particle went right.
+
+    // To fix the manifold, what you really need to know is the number of timelines
+    // active after a single particle completes all of its possible journeys through
+    // the manifold.
+
+    public int[] findStartingIndex(String input, int[] possibleRoutes) {
+        Set<Integer> startingIndex = new HashSet<>();
+        for (int i = 0; i < input.length(); i++) {
+            if (input.charAt(i) == 'S') {
+                startingIndex.add(i);
+                possibleRoutes[i]++;
+            }
+        }
+        currentIndices = startingIndex;
+        return possibleRoutes;
+    }
+
+    public void addPath(String nextLine, int lineIndex, int[] possibleRoutes) {
+        Set<Integer> newIndex = new HashSet<>();
+        for (Integer index : currentIndices) {
+            if (nextLine.charAt(index) == '^') {
+                newIndex.add(index - 1);
+                newIndex.add(index + 1);
+                splitCount++;
+                possibleRoutes[index - 1] += possibleRoutes[index];
+                possibleRoutes[index + 1] += possibleRoutes[index] ;
+                possibleRoutes[index] = 0;
+            } else {
+                newIndex.add(index);
+            }
+        }
+        if (newIndex.size() == 0) {
+            return;
+        }
+        currentIndices = newIndex;
+    }
+
+    public void solveForPartTwo(List<String> puzzleInput) {
+        int lengthOfLine = puzzleInput.get(0).length();
+        int[] positionTotals = new int[lengthOfLine];
+        findStartingIndex(puzzleInput.get(0), positionTotals);
+        for (int i = 1; i < puzzleInput.size(); i++) {
+            addPath(puzzleInput.get(i), i, positionTotals);
+        }
+        for (int i : positionTotals) {
+            possibleRoutes+= i;
         }
     }
 }

@@ -97,4 +97,14 @@ public class SplitterTest {
         int expectedResult = 4;
         assertEquals(expectedResult, splitter.splitCount);
     }
+
+    // ----
+
+    @Test
+    public void canSolveExampleForPartTwo() {
+        List<String> puzzleInput = FileReader.readFileIntoList("src/test/resources/daySeven/", "input");
+        splitter.solveForPartTwo(puzzleInput);
+        int expectedResult = 40;
+        assertEquals(expectedResult, splitter.possibleRoutes);
+    }
 }
