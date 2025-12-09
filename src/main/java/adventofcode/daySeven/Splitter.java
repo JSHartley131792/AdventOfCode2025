@@ -6,7 +6,7 @@ import java.util.Set;
 
 public class Splitter {
     public int splitCount = 0;
-    public int possibleRoutes = 0;
+    public long possibleRoutes = 0L;
 
     public Set<Integer> currentIndices = new HashSet<>();
 
@@ -55,19 +55,19 @@ public class Splitter {
     // active after a single particle completes all of its possible journeys through
     // the manifold.
 
-    public int[] findStartingIndex(String input, int[] possibleRoutes) {
+    public long[] findStartingIndex(String input, long[] positionTotals) {
         Set<Integer> startingIndex = new HashSet<>();
         for (int i = 0; i < input.length(); i++) {
             if (input.charAt(i) == 'S') {
                 startingIndex.add(i);
-                possibleRoutes[i]++;
+                positionTotals[i]++;
             }
         }
         currentIndices = startingIndex;
-        return possibleRoutes;
+        return positionTotals;
     }
 
-    public void addPath(String nextLine, int lineIndex, int[] possibleRoutes) {
+    public void addPath(String nextLine, long[] possibleRoutes) {
         Set<Integer> newIndex = new HashSet<>();
         for (Integer index : currentIndices) {
             if (nextLine.charAt(index) == '^') {
@@ -89,12 +89,12 @@ public class Splitter {
 
     public void solveForPartTwo(List<String> puzzleInput) {
         int lengthOfLine = puzzleInput.get(0).length();
-        int[] positionTotals = new int[lengthOfLine];
+        long[] positionTotals = new long[lengthOfLine];
         findStartingIndex(puzzleInput.get(0), positionTotals);
         for (int i = 1; i < puzzleInput.size(); i++) {
-            addPath(puzzleInput.get(i), i, positionTotals);
+            addPath(puzzleInput.get(i), positionTotals);
         }
-        for (int i : positionTotals) {
+        for (long i : positionTotals) {
             possibleRoutes+= i;
         }
     }
