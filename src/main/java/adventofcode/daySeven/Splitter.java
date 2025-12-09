@@ -1,5 +1,7 @@
 package adventofcode.daySeven;
 
+import java.util.List;
+
 public class Splitter {
     int splitCount;
 
@@ -12,6 +14,10 @@ public class Splitter {
             }
         }
         return 0;
+    }
+
+    public List<Integer> findSplit(String nextLine, List<Integer> currentIndex) {
+        return currentIndex;
     }
 
     
