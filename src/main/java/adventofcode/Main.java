@@ -1,13 +1,16 @@
 package adventofcode;
 
 import java.math.BigInteger;
+import java.util.List;
 
 import adventofcode.dayFive.Ingredients;
 import adventofcode.dayFour.Forklifts;
 import adventofcode.dayOne.Rotations;
+import adventofcode.daySeven.Splitter;
 import adventofcode.daySix.Cephalopod;
 import adventofcode.dayThree.Joltage;
 import adventofcode.dayTwo.Search;
+import adventofcode.util.FileReader;
 
 public class Main {
     public static void main(String[] args) {
@@ -16,7 +19,8 @@ public class Main {
         // dayThree();
         // dayFour();
         // dayFive();
-        daySix();
+        // daySix();
+        daySeven();
     }
 
     public static void dayOne() {
@@ -73,5 +77,16 @@ public class Main {
         System.out.println(cephalopod.solveForPartTwo(
             cephalopod.readInput("main", "input")
         ));
+    }
+    
+    public static void daySeven() {
+        List<String> input = FileReader.readFileIntoList("src/main/resources/daySeven/", "input");
+        Splitter splitter = new Splitter();
+        splitter.solveForPartOne(input);
+        System.out.println("The total for partOne ended up at: ");
+        System.out.println(splitter.splitCount);
+        splitter.solveForPartTwo(input);
+        System.out.println("The total for partTwo ended up at: ");
+        System.out.println(splitter.possibleRoutes);
     }
 }
