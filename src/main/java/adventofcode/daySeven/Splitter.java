@@ -31,5 +31,4 @@ public class Splitter {
         }
         return newIndex;
     }
-
 }
