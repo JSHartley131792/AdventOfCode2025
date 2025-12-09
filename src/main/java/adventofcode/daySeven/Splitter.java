@@ -29,6 +29,8 @@ public class Splitter {
                 newIndex.add(index - 1);
                 newIndex.add(index + 1);
                 splitCount++;
+            } else {
+                newIndex.add(index);
             }
         }
         if (newIndex.size() == 0) {

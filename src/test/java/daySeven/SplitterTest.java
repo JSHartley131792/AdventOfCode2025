@@ -2,6 +2,7 @@ package daySeven;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -82,6 +83,18 @@ public class SplitterTest {
         List<String> puzzleInput = FileReader.readFileIntoList("src/test/resources/daySeven/", "input");
         splitter.solveForPartOne(puzzleInput);
         int expectedResult = 21;
+        assertEquals(expectedResult, splitter.splitCount);
+    }
+    
+    @Test
+    public void canRecogniseHalfSplit() {
+        List<String> input = new ArrayList<>();
+        input.add(".....S.....");
+        input.add(".....^.....");
+        input.add("......^....");
+        input.add("....^..^...");
+        splitter.solveForPartOne(input);
+        int expectedResult = 4;
         assertEquals(expectedResult, splitter.splitCount);
     }
 }
