@@ -1,18 +1,18 @@
 package adventofcode.daySeven;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 public class Splitter {
     public int splitCount = 0;
 
-    public List<Integer> currentIndices = new ArrayList<>();
+    public Set<Integer> currentIndices = new HashSet<>();
 
     public Splitter() {
     }
 
     public void findStartingIndex(String input) {
-        List<Integer> startingIndex = new ArrayList<>();
+        Set<Integer> startingIndex = new HashSet<>();
         for (int i = 0; i < input.length(); i++) {
             if (input.charAt(i) == 'S') {
                 startingIndex.add(i);
@@ -22,7 +22,7 @@ public class Splitter {
     }
 
     public void findSplit(String nextLine) {
-        List<Integer> newIndex = new ArrayList<>();
+        Set<Integer> newIndex = new HashSet<>();
         for (Integer index : currentIndices) {
             if (nextLine.charAt(index) == '^') {
                 newIndex.add(index - 1);
