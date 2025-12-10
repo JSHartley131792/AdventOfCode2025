@@ -3,6 +3,7 @@ package adventofcode;
 import java.math.BigInteger;
 import java.util.List;
 
+import adventofcode.dayEight.Junctions;
 import adventofcode.dayFive.Ingredients;
 import adventofcode.dayFour.Forklifts;
 import adventofcode.dayOne.Rotations;
@@ -20,7 +21,8 @@ public class Main {
         // dayFour();
         // dayFive();
         // daySix();
-        daySeven();
+        // daySeven();
+        dayEight();
     }
 
     public static void dayOne() {
@@ -88,5 +90,13 @@ public class Main {
         splitter.solveForPartTwo(input);
         System.out.println("The total for partTwo ended up at: ");
         System.out.println(splitter.possibleRoutes);
+    }
+    
+    public static void dayEight() {
+        List<String> input = FileReader.readFileIntoList("src/main/resources/dayEight/", "input");
+        Junctions junctions = new Junctions();
+        junctions.solveForPartOne(input, 1000);
+        System.out.println("The total for partOne ended up at: ");
+        System.out.println(junctions.totalForPartOne);
     }
 }

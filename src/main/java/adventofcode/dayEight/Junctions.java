@@ -111,7 +111,7 @@ public class Junctions {
         }
     }
 
-    public void solveForPartOne(List<String> input) {
+    public void solveForPartOne(List<String> input, int limit) {
         for (String coordinateString : input) {
             String[] split = coordinateString.split(",");
             Coordinates coordinates = new Coordinates(Integer.valueOf(split[0]), Integer.valueOf(split[1]),
@@ -119,7 +119,7 @@ public class Junctions {
             listOfCoordinates.add(coordinates);
         }
         computeDistances();
-        linkCoordinates(listOfCoordinates.size() / 2);
+        linkCoordinates(limit);
         final List<Integer> sortedSizes = junctions.stream()
                 .map(Set::size)
                 .sorted((a, b) -> b - a)

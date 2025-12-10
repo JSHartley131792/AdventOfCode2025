@@ -77,7 +77,7 @@ public class JunctionsTest {
 
     @Test
     public void canSolveForPartOne() {
-        junctions.solveForPartOne(input);
+        junctions.solveForPartOne(input, 10);
         long expectedResponse = 40;
         assertEquals(expectedResponse, junctions.totalForPartOne);
     }
