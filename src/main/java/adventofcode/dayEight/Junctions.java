@@ -1,5 +1,11 @@
 package adventofcode.dayEight;
 
+import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 public class Junctions {
     public class Coordinates {
         long x;
@@ -13,12 +19,53 @@ public class Junctions {
         }
 
         public double distanceTo(Coordinates valueCoordinates) {
-            return Math.sqrt((
-                Math.pow((x - valueCoordinates.x), 2) +
-                Math.pow((y - valueCoordinates.y), 2) +
-                Math.pow((z - valueCoordinates.z), 2)
-            ));
+            return Math.sqrt((Math.pow((x - valueCoordinates.x), 2) +
+                    Math.pow((y - valueCoordinates.y), 2) +
+                    Math.pow((z - valueCoordinates.z), 2)));
+        }
+
+        public boolean isEqualTo(Coordinates coordinates) {
+            return x == coordinates.x && y == coordinates.y && z == coordinates.z;
         }
 
     }
+
+    public class CoordinateSystem {
+        public Coordinates coordinates;
+        public boolean linked;
+        public int indexOfLinked;
+
+        public CoordinateSystem(Coordinates coordinates, boolean linked) {
+            this.coordinates = coordinates;
+            this.linked = linked;
+        }
+
+        public Coordinates getCoordinates() {
+            return coordinates;
+        }
+
+        public boolean getLinked() {
+            return linked;
+        }
+
+        public int getIndexOfLinked() {
+            return indexOfLinked;
+        }
+
+        public void findClosest(List<CoordinateSystem> listOfCoordinates) {
+            HashMap<Integer, Double> indexToDistanceMap = new HashMap<>();
+            for (int i = 0; i < listOfCoordinates.size(); i++) {
+                CoordinateSystem coordinateSystem = listOfCoordinates.get(i);
+                if (coordinates.isEqualTo(coordinateSystem.coordinates)) {
+                    continue;
+                } else {
+                    indexToDistanceMap.put(i, coordinates.distanceTo(coordinateSystem.coordinates));
+                }
+            }
+            linked = true;
+            indexOfLinked = indexToDistanceMap.entrySet().stream().min(Comparator.comparingDouble(Map.Entry::getValue)).orElse(null).getKey();
+        }
+    }
+
+    public List<CoordinateSystem> listOfCoordinates = new ArrayList<>();
 }
