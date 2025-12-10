@@ -9,7 +9,6 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import adventofcode.dayEight.Junctions;
-import adventofcode.dayEight.Junctions.CoordinateSystem;
 import adventofcode.dayEight.Junctions.Coordinates;
 
 public class JunctionsTest {
@@ -58,73 +57,28 @@ public class JunctionsTest {
     }
 
     @Test
-    public void canFindClosest() {
-        // Arrange
-        Coordinates baseCoordinates = junctions.new Coordinates(0, 0, 0);
-        Coordinates farCoordinates = junctions.new Coordinates(0, 3, 4);
-        Coordinates nearCoordinates = junctions.new Coordinates(0, 1, 1);
-        CoordinateSystem baseSystem = junctions.new CoordinateSystem(baseCoordinates, false);
-        CoordinateSystem farSystem = junctions.new CoordinateSystem(farCoordinates, false);
-        CoordinateSystem nearSystem = junctions.new CoordinateSystem(nearCoordinates, false);
-        junctions.listOfCoordinates.add(baseSystem);
-        junctions.listOfCoordinates.add(farSystem);
-        junctions.listOfCoordinates.add(nearSystem);
-        // Act
-        baseSystem.findClosest(junctions.listOfCoordinates, 0);
-        // Assert
-        long expectedIndexLinkToBase = 2;
-        assertEquals(expectedIndexLinkToBase, baseSystem.indexOfLinked);
-    }
-
-    @Test
-    public void canLinkAllInSystem() {
-        // Arrange
-        Coordinates baseCoordinates = junctions.new Coordinates(0, 0, 0);
-        Coordinates farCoordinates = junctions.new Coordinates(8, 8, 8);
-        Coordinates nearCoordinates = junctions.new Coordinates(0, 1, 1);
-        Coordinates furtherCoordinates = junctions.new Coordinates(9, 9, 9);
-        CoordinateSystem baseSystem = junctions.new CoordinateSystem(baseCoordinates, false);
-        CoordinateSystem farSystem = junctions.new CoordinateSystem(farCoordinates, false);
-        CoordinateSystem nearSystem = junctions.new CoordinateSystem(nearCoordinates, false);
-        CoordinateSystem furtherSystem = junctions.new CoordinateSystem(furtherCoordinates, false);
-        junctions.listOfCoordinates.add(baseSystem);
-        junctions.listOfCoordinates.add(farSystem);
-        junctions.listOfCoordinates.add(nearSystem);
-        junctions.listOfCoordinates.add(furtherSystem);
-        // Act
-        junctions.linkCoordinates();
-        // Assert
-        long expectedIndexLinkToBase = 2;
-        long expectedIndexLinkToNear = 0;
-        long expectedIndexLinkToFar = 3;
-        assertEquals(expectedIndexLinkToBase, junctions.listOfCoordinates.get(0).indexOfLinked);
-        assertEquals(expectedIndexLinkToNear, junctions.listOfCoordinates.get(2).indexOfLinked);
-        assertEquals(expectedIndexLinkToFar, junctions.listOfCoordinates.get(1).indexOfLinked);
-        int expectedNearJunction = 0;
-        int expectedFarJunction = 1;
-        assertEquals(expectedNearJunction, junctions.listOfCoordinates.get(0).junction);
-        assertEquals(expectedFarJunction, junctions.listOfCoordinates.get(1).junction);
-    }
-
-    @Test
-    public void canFindClosestPairInSystem() {
-        // arrange
+    public void canFindDistanceForWholeList() {
         for (String coordinateString : input) {
             String[] split = coordinateString.split(",");
             Coordinates coordinates = junctions.new Coordinates(Integer.valueOf(split[0]), Integer.valueOf(split[1]),
                     Integer.valueOf(split[2]));
-            CoordinateSystem coordinateSystem = junctions.new CoordinateSystem(coordinates, false);
-            junctions.listOfCoordinates.add(coordinateSystem);
+            junctions.listOfCoordinates.add(coordinates);
         }
-        // act
-        // assert
-        CoordinateSystem systemOne = junctions.new CoordinateSystem(junctions.new Coordinates(162, 817, 812), false);
-        CoordinateSystem systemTwo = junctions.new CoordinateSystem(junctions.new Coordinates(425, 690, 689), false);
-        assertEquals(systemOne.coordinates.getX(), junctions.findClosestPairWithinList().getStartingCoord().coordinates.getX());
-        assertEquals(systemOne.coordinates.getY(), junctions.findClosestPairWithinList().getStartingCoord().coordinates.getY());
-        assertEquals(systemOne.coordinates.getZ(), junctions.findClosestPairWithinList().getStartingCoord().coordinates.getZ());
-        assertEquals(systemTwo.coordinates.getX(), junctions.findClosestPairWithinList().getEndingCoord().coordinates.getX());
-        assertEquals(systemTwo.coordinates.getY(), junctions.findClosestPairWithinList().getEndingCoord().coordinates.getY());
-        assertEquals(systemTwo.coordinates.getZ(), junctions.findClosestPairWithinList().getEndingCoord().coordinates.getZ());
+        Coordinates expectedShortestOne = junctions.new Coordinates(162, 817, 812);
+        Coordinates expectedShortestTwo = junctions.new Coordinates(425, 690, 689);
+        junctions.computeDistances();
+        assertEquals(expectedShortestOne.getX(), junctions.listOfDistances.get(0).getStartingCoord().getX());
+        assertEquals(expectedShortestOne.getY(), junctions.listOfDistances.get(0).getStartingCoord().getY());
+        assertEquals(expectedShortestOne.getZ(), junctions.listOfDistances.get(0).getStartingCoord().getZ());
+        assertEquals(expectedShortestTwo.getX(), junctions.listOfDistances.get(0).getEndingCoord().getX());
+        assertEquals(expectedShortestTwo.getY(), junctions.listOfDistances.get(0).getEndingCoord().getY());
+        assertEquals(expectedShortestTwo.getZ(), junctions.listOfDistances.get(0).getEndingCoord().getZ());
+    }
+
+    @Test
+    public void canSolveForPartOne() {
+        junctions.solveForPartOne(input);
+        long expectedResponse = 40;
+        assertEquals(expectedResponse, junctions.totalForPartOne);
     }
 }
