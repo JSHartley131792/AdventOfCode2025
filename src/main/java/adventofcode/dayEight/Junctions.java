@@ -33,7 +33,8 @@ public class Junctions {
     public class CoordinateSystem {
         public Coordinates coordinates;
         public boolean linked;
-        public int indexOfLinked;
+        public int indexOfLinked = -1;
+        public int junction = -1;
 
         public CoordinateSystem(Coordinates coordinates, boolean linked) {
             this.coordinates = coordinates;
@@ -47,12 +48,24 @@ public class Junctions {
         public boolean getLinked() {
             return linked;
         }
+        
+        public void setLinked(boolean isLinked) {
+            linked = isLinked;
+        }
 
         public int getIndexOfLinked() {
             return indexOfLinked;
         }
+        
+        public int getJunction() {
+            return junction;
+        }
+        
+        public void setJunction(int newJunction) {
+            junction = newJunction;
+        }
 
-        public void findClosest(List<CoordinateSystem> listOfCoordinates) {
+        public void findClosest(List<CoordinateSystem> listOfCoordinates, int junctionCounter) {
             HashMap<Integer, Double> indexToDistanceMap = new HashMap<>();
             for (int i = 0; i < listOfCoordinates.size(); i++) {
                 CoordinateSystem coordinateSystem = listOfCoordinates.get(i);
@@ -63,9 +76,27 @@ public class Junctions {
                 }
             }
             linked = true;
-            indexOfLinked = indexToDistanceMap.entrySet().stream().min(Comparator.comparingDouble(Map.Entry::getValue)).orElse(null).getKey();
+            indexOfLinked = indexToDistanceMap.entrySet().stream().min(Comparator.comparingDouble(Map.Entry::getValue))
+                    .orElse(null).getKey();
+            CoordinateSystem linkedCoordinate = listOfCoordinates.get(indexOfLinked);
+            linkedCoordinate.setLinked(true);
         }
     }
 
     public List<CoordinateSystem> listOfCoordinates = new ArrayList<>();
+
+    public void linkCoordinates() {
+        int junctionCounter = 0;
+        for (CoordinateSystem coordinateSystem : listOfCoordinates) {
+            coordinateSystem.findClosest(listOfCoordinates, junctionCounter);
+            CoordinateSystem linkedCoordinate = listOfCoordinates.get(coordinateSystem.getIndexOfLinked());
+            if (linkedCoordinate.getIndexOfLinked() >= 0) {
+                coordinateSystem.setJunction(linkedCoordinate.junction);
+            } else {
+                linkedCoordinate.setJunction(junctionCounter);
+                coordinateSystem.setJunction(junctionCounter);
+                junctionCounter++;
+            }
+        }
+    }
 }
