@@ -17,10 +17,18 @@ public class JunctionsTest {
     }
 
     @Test
-    public void canFindDistanceBetweenTwo() {
+    public void canFindDistanceBetweenTwoForSimpleCase() {
         Coordinates baseCoordinates = junctions.new Coordinates(0, 0, 0);
         Coordinates valueCoordinates = junctions.new Coordinates(0, 0, 0);
-        float expectedResult = 0f;
+        double expectedResult = 0f;
+        assertEquals(expectedResult, baseCoordinates.distanceTo(valueCoordinates));
+    }
+
+    @Test
+    public void canFindDistanceBetweenTwo() {
+        Coordinates baseCoordinates = junctions.new Coordinates(0, 0, 0);
+        Coordinates valueCoordinates = junctions.new Coordinates(0, 3, 4);
+        double expectedResult = 5;
         assertEquals(expectedResult, baseCoordinates.distanceTo(valueCoordinates));
     }
 }

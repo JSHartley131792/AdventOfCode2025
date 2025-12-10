@@ -12,8 +12,12 @@ public class Junctions {
             this.z = z;
         }
 
-        public Float distanceTo(Coordinates valueCoordinates) {
-            return 0f;
+        public double distanceTo(Coordinates valueCoordinates) {
+            return Math.sqrt((
+                Math.pow((x - valueCoordinates.x), 2) +
+                Math.pow((y - valueCoordinates.y), 2) +
+                Math.pow((z - valueCoordinates.z), 2)
+            ));
         }
 
     }
